@@ -2,7 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import Grid from "./Grid";
 
-const Pointer = styled.div`
+const Pointer = () => (
+  <div>
+    <i className="material-icons">center_focus_weak</i>
+  </div>
+);
+
+const StyledPointer = styled.div`
   width: ${(props) => props.width}px;
   background-color: yellowgreen;
   height: ${(props) => props.height}px;
@@ -10,6 +16,10 @@ const Pointer = styled.div`
   top: ${(prop) => prop.top}px;
   left: ${(prop) => prop.left}px;
   opacity: 0.5;
+
+  i {
+    width: ${(props) => props.width}px;
+  }
 `;
 
 class GridContainer extends React.PureComponent {
@@ -252,12 +262,15 @@ class GridContainer extends React.PureComponent {
       <div className="col s12 blue grid-container" id="grid-container">
         <Grid data={gridMap} cellSize={this.state.cellSize} />
 
-        <Pointer
+        <StyledPointer
           width={this.state.cellSize}
           height={this.state.cellSize}
           left={this.state.pointerX}
           top={this.state.pointerY}
-        />
+          className="valign-wrapper"
+        >
+          <i className="material-icons center-align">flare</i>
+        </StyledPointer>
       </div>
     );
   }

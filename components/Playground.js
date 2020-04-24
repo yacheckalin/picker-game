@@ -8,16 +8,6 @@ class Playground extends React.Component {
 
     this.state = {
       logMessage: "You can make a move! [right, left, up, down, space]",
-      mission: [
-        `The mission is to find exit!`,
-        ` -> - go right`,
-        ` <- - go left`,
-        ` ^ - go up`,
-        `  - go down`,
-        ` Enter - open the door`,
-        ` Space - pick up`,
-        ` Alt - observe`,
-      ],
     };
 
     this.handleLogMessage = this.handleLogMessage.bind(this);
@@ -42,9 +32,31 @@ export default Playground;
 const GridInfo = React.memo((props) => (
   <div className="col s12 card-panel lime lighten-4">
     <blockquote>
-      {props.children.map((msg) => (
-        <p>{msg}</p>
-      ))}
+      <p>The mission is to find the EXIT!</p>
+      <p>
+        <i className="material-icons">arrow_back</i> - go left
+      </p>
+      <p>
+        <i className="material-icons">arrow_forward</i> - go right
+      </p>
+      <p>
+        <i className="material-icons">arrow_upward</i> - go up
+      </p>
+      <p>
+        <i className="material-icons">arrow_downward</i> - go down
+      </p>
+      <p>
+        <i className="material-icons">arrow_downward</i> - go down
+      </p>
+      <p>
+        <i className="material-icons">photo_camera</i> [Alt] - observe
+      </p>
+      <p>
+        <i className="material-icons">publish</i> [Space] - pick an object
+      </p>
+      <p>
+        <i className="material-icons">lock_open</i> [Enter] - open the door
+      </p>
     </blockquote>
   </div>
 ));

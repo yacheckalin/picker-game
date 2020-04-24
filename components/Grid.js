@@ -21,7 +21,7 @@ const Grid = ({ data, cellSize }) => (
               width={cellSize}
               height={cellSize}
             >
-              &nbsp;{col}
+              &nbsp;
             </StyledCell>
           ))}
         </tr>
