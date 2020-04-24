@@ -2,12 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Grid from "./Grid";
 import GridModal from "./GridModal";
-
-const Pointer = () => (
-  <div>
-    <i className="material-icons">center_focus_weak</i>
-  </div>
-);
+import BackPack from "./BackPack";
 
 const StyledPointer = styled.div`
   width: ${(props) => props.width}px;
@@ -45,7 +40,7 @@ class GridContainer extends React.PureComponent {
       pointerColIndex: 0,
       pointerRowIndex: 0,
       gridMap: [
-        [0, 0, 1, 1, 1, 1, 1, 1],
+        [8, 0, 1, 1, 1, 1, 1, 1],
         [1, 0, 1, 0, 0, 0, 0, 1],
         [1, 0, 1, 0, 1, 1, 1, 1],
         [1, 0, 1, 0, 1, 0, 2, 1],
@@ -55,18 +50,14 @@ class GridContainer extends React.PureComponent {
         [1, 1, 1, 1, 1, 1, 1, 1],
       ],
       gridSize: 8,
-      backpack: [],
+      backpack: [0, 0, 0, 0, 0, 0, 0, 0],
+      backPackSize: 8,
       levelPassed: false,
     };
   }
 
   observe() {
-    const {
-      pointerColIndex: y,
-      pointerRowIndex: x,
-      backpack,
-      gridMap,
-    } = this.state;
+    const { pointerColIndex: y, pointerRowIndex: x, gridMap } = this.state;
 
     switch (gridMap[x][y]) {
       case 9:
@@ -112,9 +103,15 @@ class GridContainer extends React.PureComponent {
     const { pointerColIndex: y, pointerRowIndex: x, gridMap } = this.state;
     if (gridMap[x][y] == 2) {
       gridMap[x][y] = 8; // mark as visited
-      let backpack = this.state.backpack.concat(2);
+
+      let firstZeroIndex = this.state.backpack.findIndex((item) => !item);
+      const backpack = Array.from(this.state.backpack);
+      backpack[firstZeroIndex] = 2;
+      backpack.reverse();
+
       this.setState({ backpack });
       this.setState({ gridMap });
+
       this.props.handleMessage(`You've picked a KEY!`);
     } else {
       this.props.handleMessage(`There is nothing to pick up!`);
@@ -259,24 +256,30 @@ class GridContainer extends React.PureComponent {
     });
   }
   render() {
-    const { gridMap } = this.state;
-    return (
-      <div className="col s12 blue grid-container" id="grid-container">
-        <Grid data={gridMap} cellSize={this.state.cellSize} />
+    const { gridMap, gridSize, backpack } = this.state;
 
-        <StyledPointer
-          width={this.state.cellSize}
-          height={this.state.cellSize}
-          left={this.state.pointerX}
-          top={this.state.pointerY}
-          className="valign-wrapper"
-        >
-          <i className="material-icons center-align">flare</i>
-        </StyledPointer>
-        {this.state.levelPassed && (
-          <GridModal message={"Congratulations you win!!!"} win={true} />
-        )}
-      </div>
+    return (
+      <>
+        <div className="col s10 blue grid-container" id="grid-container">
+          <Grid data={gridMap} cellSize={this.state.cellSize} />
+
+          <StyledPointer
+            width={this.state.cellSize}
+            height={this.state.cellSize}
+            left={this.state.pointerX}
+            top={this.state.pointerY}
+            className="valign-wrapper"
+          >
+            <i className="material-icons center-align">flare</i>
+          </StyledPointer>
+          {this.state.levelPassed && (
+            <GridModal message={"Congratulations you win!!!"} win={true} />
+          )}
+        </div>
+        <div className="col s2 backpack-container">
+          <BackPack data={backpack} cellSize={this.state.cellSize} />
+        </div>
+      </>
     );
   }
 }

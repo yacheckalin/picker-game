@@ -37,9 +37,7 @@ const GridIntro = React.memo((props) => {
               <p>
                 <i className="material-icons">arrow_upward</i> - go up
               </p>
-              <p>
-                <i className="material-icons">arrow_downward</i> - go down
-              </p>
+
               <p>
                 <i className="material-icons">arrow_downward</i> - go down
               </p>
