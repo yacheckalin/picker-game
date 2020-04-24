@@ -119,7 +119,6 @@ class GridContainer extends React.PureComponent {
   }
 
   checkPointer({ pointerColIndex: y, pointerRowIndex: x }) {
-    console.log(`x: ${x}, y: ${y}`);
     const { gridMap } = this.state;
     if (
       gridMap[x] !== undefined &&
@@ -150,7 +149,7 @@ class GridContainer extends React.PureComponent {
       this.setState({ pointerX: pointerX + cellSize });
       this.props.handleMessage(`You steped to the right!`);
     } else {
-      this.props.handleMessage(`You can't move there`);
+      this.props.handleMessage(`You can't move there! There is a wall ...`);
     }
   }
 
@@ -166,7 +165,7 @@ class GridContainer extends React.PureComponent {
       this.setState({ pointerX: pointerX - cellSize });
       this.props.handleMessage(`You steped to the left!`);
     } else {
-      this.props.handleMessage(`You can't move there`);
+      this.props.handleMessage(`You can't move there! There is a wall ...`);
     }
   }
 
@@ -182,7 +181,7 @@ class GridContainer extends React.PureComponent {
       this.setState({ pointerY: pointerY - cellSize });
       this.props.handleMessage(`You steped up!`);
     } else {
-      this.props.handleMessage(`You can't move there`);
+      this.props.handleMessage(`You can't move there! There is a wall ...`);
     }
   }
   moveDown() {
@@ -197,7 +196,7 @@ class GridContainer extends React.PureComponent {
       this.setState({ pointerY: pointerY + cellSize });
       this.props.handleMessage(`You steped down!`);
     } else {
-      this.props.handleMessage(`You can't move there`);
+      this.props.handleMessage(`You can't move there! There is a wall ...`);
     }
   }
 
@@ -234,7 +233,7 @@ class GridContainer extends React.PureComponent {
         e.preventDefault();
         break;
       default:
-        console.log(e.key);
+        this.props.handleMessage(`I don't know what to do ....`);
         break;
     }
   }
