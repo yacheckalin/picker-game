@@ -41,23 +41,14 @@ class GridContainer extends React.PureComponent {
       pointerY: 0,
       pointerColIndex: 0,
       pointerRowIndex: 0,
-      gridMap: [
-        [VISITED, 0, WALL, WALL, 1, 1, 1, 1],
-        [1, 0, 1, 0, 0, 0, KEYS.RED_KEY, 1],
-        [1, 0, 1, 0, 1, 1, 1, 1],
-        [1, 0, 1, 0, 1, 0, KEYS.BLUE_KEY, 1],
-        [1, 0, 0, 0, 1, 0, 0, 1],
-        [1, 0, 1, 0, 1, 0, 0, 1],
-        [1, KEYS.GREEN_KEY, 1, 0, 0, 0, 0, DOORS.BLUE_DOOR],
-        [1, 1, 1, 1, 1, 1, 1, 1],
-      ],
+      gridMap: this.props.mapper,
       gridSize: 8,
       backpack: [0, 0, 0, 0, 0, 0, 0, 0],
       backPackSize: 8,
       levelPassed: false,
     };
   }
-
+  
   observe() {
     const { pointerColIndex: y, pointerRowIndex: x, gridMap } = this.state;
 
