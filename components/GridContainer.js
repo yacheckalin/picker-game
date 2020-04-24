@@ -24,6 +24,7 @@ class GridContainer extends React.PureComponent {
     this.checkPointer = this.checkPointer.bind(this);
     this.openDoor = this.openDoor.bind(this);
     this.pick = this.pick.bind(this);
+    this.observe = this.observe.bind(this);
 
     this.state = {
       containerWidth: 0,
@@ -47,6 +48,21 @@ class GridContainer extends React.PureComponent {
     };
   }
 
+  observe() {
+    const {
+      pointerColIndex: y,
+      pointerRowIndex: x,
+      backpack,
+      gridMap,
+    } = this.state;
+
+    if (gridMap[x][y] == 9) {
+      this.props.handleMessage(`You've found the EXIT!`);
+    }
+    if (gridMap[x][y] == 2) {
+      this.props.handleMessage(`There is a KEY, do you wanna pick it up?`);
+    }
+  }
   openDoor() {
     const {
       pointerColIndex: y,
@@ -91,9 +107,7 @@ class GridContainer extends React.PureComponent {
       if (gridMap[x][y] != 9 && gridMap[x][y] != 2) {
         gridMap[x][y] = 8;
       }
-      if (gridMap[x][y] == 9) {
-        this.props.handleMessage(`You've found the EXIT!`);
-      }
+
       this.setState({ gridMap });
       this.setState({ pointerRowIndex: x, pointerColIndex: y });
       return true;
@@ -190,6 +204,10 @@ class GridContainer extends React.PureComponent {
         break;
       case "Enter":
         this.openDoor();
+        e.preventDefault();
+        break;
+      case "Alt":
+        this.observe();
         e.preventDefault();
         break;
       default:
