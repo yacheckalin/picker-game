@@ -4,6 +4,8 @@ import Grid from "./Grid";
 import GridModal from "./GridModal";
 import BackPack from "./BackPack";
 
+import { KEYS, DOORS, WALL, VISITED, EMPTY } from "../constants";
+
 const StyledPointer = styled.div`
   width: ${(props) => props.width}px;
   background-color: yellowgreen;
@@ -40,13 +42,13 @@ class GridContainer extends React.PureComponent {
       pointerColIndex: 0,
       pointerRowIndex: 0,
       gridMap: [
-        [8, 0, 1, 1, 1, 1, 1, 1],
-        [1, 0, 1, 0, 0, 0, 0, 1],
+        [VISITED, 0, 1, 1, 1, 1, 1, 1],
+        [1, 0, 1, 0, 0, 0, KEYS.RED_KEY, 1],
         [1, 0, 1, 0, 1, 1, 1, 1],
-        [1, 0, 1, 0, 1, 0, 2, 1],
+        [1, 0, 1, 0, 1, 0, KEYS.BLUE_KEY, 1],
         [1, 0, 0, 0, 1, 0, 0, 1],
         [1, 0, 1, 0, 1, 0, 0, 1],
-        [1, 0, 1, 0, 0, 0, 0, 9],
+        [1, KEYS.GREEN_KEY, 1, 0, 0, 0, 0, DOORS.BLUE_DOOR],
         [1, 1, 1, 1, 1, 1, 1, 1],
       ],
       gridSize: 8,
@@ -60,17 +62,21 @@ class GridContainer extends React.PureComponent {
     const { pointerColIndex: y, pointerRowIndex: x, gridMap } = this.state;
 
     switch (gridMap[x][y]) {
-      case 9:
-        this.props.handleMessage(`You've found the EXIT!`);
+      case DOORS.GREEN_DOOR:
+      case DOORS.RED_DOOR:
+      case DOORS.BLUE_DOOR:
+        this.props.handleMessage(`You've found the door!`);
         break;
-      case 2:
+      case KEYS.GREEN_KEY:
+      case KEYS.RED_KEY:
+      case KEYS.GREEN_KEY:
         this.props.handleMessage(`There is a KEY, do you wanna pick it up?`);
         break;
-      case 1:
+      case WALL:
         this.props.handleMessage(`There is a WALL`);
         break;
-      case 0:
-      case 8:
+      case EMPTY:
+      case VISITED:
         this.props.handleMessage(`Just an empty space`);
         break;
       default:
@@ -87,8 +93,8 @@ class GridContainer extends React.PureComponent {
       gridMap,
     } = this.state;
 
-    if (gridMap[x][y] == 9) {
-      if (backpack.includes(2)) {
+    if (gridMap[x][y] == DOORS.BLUE_DOOR) {
+      if (backpack.includes(KEYS.BLUE_KEY)) {
         this.props.handleMessage(`You've found exit! You WIN!`);
         this.setState({ levelPassed: true });
       } else {
@@ -101,13 +107,12 @@ class GridContainer extends React.PureComponent {
 
   pick() {
     const { pointerColIndex: y, pointerRowIndex: x, gridMap } = this.state;
-    if (gridMap[x][y] == 2) {
-      gridMap[x][y] = 8; // mark as visited
 
+    if (Object.values(KEYS).includes(gridMap[x][y])) {
       let firstZeroIndex = this.state.backpack.findIndex((item) => !item);
       const backpack = Array.from(this.state.backpack);
-      backpack[firstZeroIndex] = 2;
-      backpack.reverse();
+      backpack[firstZeroIndex] = gridMap[x][y];
+      gridMap[x][y] = VISITED; // mark as visited
 
       this.setState({ backpack });
       this.setState({ gridMap });
@@ -123,11 +128,14 @@ class GridContainer extends React.PureComponent {
     if (
       gridMap[x] !== undefined &&
       gridMap[x][y] !== undefined &&
-      gridMap[x][y] != 1
+      gridMap[x][y] != WALL
     ) {
       // mark as already visited if it's not a KEY or EXIT
-      if (gridMap[x][y] != 9 && gridMap[x][y] != 2) {
-        gridMap[x][y] = 8;
+      if (
+        !Object.values(DOORS).includes(gridMap[x][y]) &&
+        !Object.values(KEYS).includes(gridMap[x][y])
+      ) {
+        gridMap[x][y] = VISITED;
       }
 
       this.setState({ gridMap });
@@ -201,7 +209,6 @@ class GridContainer extends React.PureComponent {
   }
 
   handleOnKeyDown(e) {
-    const { handleMessage } = this.props;
     const { key } = e;
     switch (key) {
       case "ArrowUp":
@@ -256,7 +263,7 @@ class GridContainer extends React.PureComponent {
     });
   }
   render() {
-    const { gridMap, gridSize, backpack } = this.state;
+    const { gridMap, backpack } = this.state;
 
     return (
       <>

@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+import { KEYS } from "../constants";
+
 const StyledCell = styled.td`
   width: ${(prop) => prop.width}px;
   height: ${(prop) => prop.height}px;
@@ -8,7 +10,24 @@ const StyledCell = styled.td`
   background-color: ${(prop) => prop.color};
 `;
 
+const colorPicker = (key) => {
+  switch (key) {
+    case KEYS.BLUE_KEY:
+      return "blue-text text-darken-2 ";
+    case KEYS.GREEN_KEY:
+      return "green-text text-darken-2";
+    case KEYS.RED_KEY:
+      return "red-text text-darken-2";
+  }
+};
+
 const BackPack = ({ data, cellSize }) => {
+  const keyCheck = (key) => {
+    for (const [k, v] of Object.entries(KEYS)) {
+      if (v === key) return true;
+    }
+    return false;
+  };
   return (
     <table>
       <tbody>
@@ -19,7 +38,9 @@ const BackPack = ({ data, cellSize }) => {
               height={cellSize}
               className="green center stack-key"
             >
-              {el === 2 && <i className="material-icons">vpn_key</i>}
+              {keyCheck(el) && (
+                <i className={`material-icons ${colorPicker(el)}`}>vpn_key</i>
+              )}
             </StyledCell>
           </tr>
         ))}
