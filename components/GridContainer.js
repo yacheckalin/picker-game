@@ -7,17 +7,149 @@ const Pointer = styled.div`
   background-color: yellowgreen;
   height: ${(props) => props.height}px;
   position: absolute;
-  top: 0;
-  left: 0;
+  top: ${(prop) => prop.top}px;
+  left: ${(prop) => prop.left}px;
   opacity: 0.5;
 `;
 
 class GridContainer extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.state = { containerWidth: 0, cellSize: 0 };
     this.recalculateCellSize = this.recalculateCellSize.bind(this);
     this.handleOnKeyDown = this.handleOnKeyDown.bind(this);
+    this.moveUp = this.moveUp.bind(this);
+    this.moveDown = this.moveDown.bind(this);
+    this.moveLeft = this.moveLeft.bind(this);
+    this.moveRight = this.moveRight.bind(this);
+    this.checkPointer = this.checkPointer.bind(this);
+    this.openDoor = this.openDoor.bind(this);
+    this.pick = this.pick.bind(this);
+
+    this.state = {
+      containerWidth: 0,
+      cellSize: 0,
+      pointerX: 0,
+      pointerY: 0,
+      pointerColIndex: 0,
+      pointerRowIndex: 0,
+      gridMap: [
+        [0, 0, 1, 1, 1, 1, 1, 1],
+        [1, 0, 1, 0, 0, 0, 0, 1],
+        [1, 0, 1, 0, 1, 1, 1, 1],
+        [1, 0, 1, 0, 1, 0, 2, 1],
+        [1, 0, 0, 0, 1, 0, 0, 1],
+        [1, 0, 1, 0, 1, 0, 0, 1],
+        [1, 0, 1, 0, 0, 0, 0, 9],
+        [1, 1, 1, 1, 1, 1, 1, 1],
+      ],
+      gridSize: 8,
+      backpack: [],
+    };
+  }
+
+  openDoor() {
+    const {
+      pointerColIndex: y,
+      pointerRowIndex: x,
+      backpack,
+      gridMap,
+    } = this.state;
+
+    if (gridMap[x][y] == 9) {
+      if (backpack.includes(2)) {
+        this.props.handleMessage(`You've found exit! You WIN!`);
+      } else {
+        this.props.handleMessage(`You don't have a key in your BAG!`);
+      }
+    } else {
+      this.props.handleMessage("There is no door!");
+    }
+  }
+
+  pick() {
+    const { pointerColIndex: y, pointerRowIndex: x, gridMap } = this.state;
+    if (gridMap[x][y] == 2) {
+      gridMap[x][y] = 0;
+      let backpack = this.state.backpack.concat(2);
+      this.setState({ backpack });
+      this.setState({ gridMap });
+      this.props.handleMessage(`You've picked a KEY!`);
+    } else {
+      this.props.handleMessage(`There is nothing to pick up!`);
+    }
+  }
+
+  checkPointer({ pointerColIndex: y, pointerRowIndex: x }) {
+    console.log(`x: ${x}, y: ${y}`);
+    const { gridMap } = this.state;
+    if (
+      gridMap[x] !== undefined &&
+      gridMap[x][y] !== undefined &&
+      gridMap[x][y] != 1
+    ) {
+      this.setState({ pointerRowIndex: x, pointerColIndex: y });
+      return true;
+    }
+    return false;
+  }
+
+  moveRight() {
+    const { pointerX, cellSize, pointerRowIndex, pointerColIndex } = this.state;
+
+    if (
+      this.checkPointer({
+        pointerRowIndex,
+        pointerColIndex: pointerColIndex + 1,
+      })
+    ) {
+      this.setState({ pointerX: pointerX + cellSize });
+    } else {
+      this.props.handleMessage(`You can't move there`);
+    }
+  }
+
+  moveLeft() {
+    const { pointerX, cellSize, pointerRowIndex, pointerColIndex } = this.state;
+
+    if (
+      this.checkPointer({
+        pointerRowIndex,
+        pointerColIndex: pointerColIndex - 1,
+      })
+    ) {
+      this.setState({ pointerX: pointerX - cellSize });
+    } else {
+      this.props.handleMessage(`You can't move there`);
+    }
+  }
+
+  moveUp() {
+    const { pointerY, cellSize, pointerRowIndex, pointerColIndex } = this.state;
+
+    if (
+      this.checkPointer({
+        pointerRowIndex: pointerRowIndex - 1,
+        pointerColIndex,
+      })
+    ) {
+      this.setState({ pointerY: pointerY - cellSize });
+    } else {
+      this.props.handleMessage(`You can't move there`);
+    }
+  }
+  moveDown() {
+    const { pointerY, cellSize, pointerColIndex, pointerRowIndex } = this.state;
+
+    if (
+      this.checkPointer({
+        pointerColIndex,
+        pointerRowIndex: pointerRowIndex + 1,
+      })
+    ) {
+      this.setState({ pointerY: pointerY + cellSize });
+    } else {
+      this.props.handleMessage(`You can't move there`);
+    }
   }
 
   handleOnKeyDown(e) {
@@ -25,32 +157,31 @@ class GridContainer extends React.PureComponent {
     const { key } = e;
     switch (key) {
       case "ArrowUp":
-        console.log("goes up!");
         handleMessage("goes up!");
+        this.moveUp();
         e.preventDefault();
         break;
       case "ArrowDown":
-        console.log("goes down!");
         handleMessage("goes down!");
-
+        this.moveDown();
         e.preventDefault();
         break;
       case "ArrowRight":
-        console.log("goes right!");
         handleMessage("goes right!");
-
+        this.moveRight();
         e.preventDefault();
         break;
       case "ArrowLeft":
-        console.log("goes left!");
         handleMessage("goes left!");
-
+        this.moveLeft();
         e.preventDefault();
         break;
       case " ":
-        console.log("pick an object!");
-        handleMessage("pick an object!");
-
+        this.pick();
+        e.preventDefault();
+        break;
+      case "Enter":
+        this.openDoor();
         e.preventDefault();
         break;
       default:
@@ -73,19 +204,20 @@ class GridContainer extends React.PureComponent {
       .clientWidth;
     this.setState({
       containerWidth,
-      cellSize: Math.floor(containerWidth / this.props.gridSize),
+      cellSize: Math.floor(containerWidth / this.state.gridSize),
     });
   }
   render() {
-    const { gridMap } = this.props;
+    const { gridMap } = this.state;
     return (
       <div className="col s12 blue grid-container" id="grid-container">
         <Grid data={gridMap} cellSize={this.state.cellSize} />
+
         <Pointer
           width={this.state.cellSize}
           height={this.state.cellSize}
-          left={0}
-          top={0}
+          left={this.state.pointerX}
+          top={this.state.pointerY}
           onClick={(e) => alert("clicked")}
         />
       </div>

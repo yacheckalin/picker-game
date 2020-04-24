@@ -7,17 +7,6 @@ class Playground extends React.Component {
     super(props);
 
     this.state = {
-      gridMap: [
-        [0, 0, 0, 0, 1, 1, 1, 1],
-        [0, 0, 0, 0, 1, 1, 1, 1],
-        [0, 0, 0, 0, 1, 1, 1, 1],
-        [0, 0, 0, 0, 1, 1, 1, 1],
-        [0, 0, 0, 0, 1, 1, 1, 1],
-        [0, 0, 0, 0, 1, 1, 1, 1],
-        [0, 0, 0, 0, 1, 1, 1, 1],
-        [0, 0, 0, 0, 1, 1, 1, 1],
-      ],
-      gridSize: 8,
       logMessage: "You can make a move! [right, left, up, down, space]",
     };
 
@@ -30,7 +19,7 @@ class Playground extends React.Component {
   render() {
     return (
       <div className="row">
-        <GridContainer {...this.state} handleMessage={this.handleLogMessage} />
+        <GridContainer handleMessage={this.handleLogMessage} />
         <GridMessage log={this.state.logMessage} />
       </div>
     );
