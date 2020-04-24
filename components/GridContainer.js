@@ -148,6 +148,7 @@ class GridContainer extends React.PureComponent {
       })
     ) {
       this.setState({ pointerX: pointerX + cellSize });
+      this.props.handleMessage(`You steped to the right!`);
     } else {
       this.props.handleMessage(`You can't move there`);
     }
@@ -163,6 +164,7 @@ class GridContainer extends React.PureComponent {
       })
     ) {
       this.setState({ pointerX: pointerX - cellSize });
+      this.props.handleMessage(`You steped to the left!`);
     } else {
       this.props.handleMessage(`You can't move there`);
     }
@@ -178,6 +180,7 @@ class GridContainer extends React.PureComponent {
       })
     ) {
       this.setState({ pointerY: pointerY - cellSize });
+      this.props.handleMessage(`You steped up!`);
     } else {
       this.props.handleMessage(`You can't move there`);
     }
@@ -192,6 +195,7 @@ class GridContainer extends React.PureComponent {
       })
     ) {
       this.setState({ pointerY: pointerY + cellSize });
+      this.props.handleMessage(`You steped down!`);
     } else {
       this.props.handleMessage(`You can't move there`);
     }
@@ -202,22 +206,18 @@ class GridContainer extends React.PureComponent {
     const { key } = e;
     switch (key) {
       case "ArrowUp":
-        handleMessage("goes up!");
         this.moveUp();
         e.preventDefault();
         break;
       case "ArrowDown":
-        handleMessage("goes down!");
         this.moveDown();
         e.preventDefault();
         break;
       case "ArrowRight":
-        handleMessage("goes right!");
         this.moveRight();
         e.preventDefault();
         break;
       case "ArrowLeft":
-        handleMessage("goes left!");
         this.moveLeft();
         e.preventDefault();
         break;
