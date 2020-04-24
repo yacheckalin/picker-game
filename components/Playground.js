@@ -23,6 +23,7 @@ class Playground extends React.Component {
         [1, 1, 1, 1, 1, 1, 1, 1],
       ],
       gridHash: "level_default",
+      gridSize: 8,
     };
     this.handleLoadLevel = this.handleLoadLevel.bind(this);
     this.handleLogMessage = this.handleLogMessage.bind(this);
@@ -31,9 +32,8 @@ class Playground extends React.Component {
   handleLogMessage(msg) {
     this.setState({ logMessage: msg });
   }
-  handleLoadLevel([gridHash, grid]) {
-    this.setState({ grid });
-    this.setState({ gridHash });
+  handleLoadLevel([gridHash, grid, gridSize]) {
+    this.setState({ grid, gridHash, gridSize });
   }
   render() {
     return (
@@ -43,6 +43,7 @@ class Playground extends React.Component {
         <GridContainer
           handleMessage={this.handleLogMessage}
           mapper={this.state.grid}
+          size={this.state.gridSize}
           key={this.state.gridHash}
         />
         <GridMessage log={this.state.logMessage} />

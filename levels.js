@@ -2,8 +2,9 @@ import { KEYS, DOORS, WALL, VISITED } from "./constants";
 
 export const LEVELS = [
   [
-    "level_1",
+    "level_1", // the map hash
     [
+      // the map
       [VISITED, 0, WALL, WALL, 1, 1, 1, 1],
       [1, 0, 1, 0, 0, 0, KEYS.RED_KEY, 1],
       [1, 0, 1, 0, 1, 1, 1, 1],
@@ -13,6 +14,8 @@ export const LEVELS = [
       [1, KEYS.GREEN_KEY, 1, 0, 0, 0, 0, DOORS.BLUE_DOOR],
       [1, 1, 1, 1, 1, 1, 1, 1],
     ],
+    8, // size of map
+    "Open the BLUE DOOR!", // mission
   ],
   [
     "level_2",
@@ -26,5 +29,39 @@ export const LEVELS = [
       [1, 0, 1, 0, 0, 0, 0, DOORS.BLUE_DOOR],
       [1, 1, 1, 1, 1, 1, 1, 1],
     ],
+    8,
+    "Open the BLUE DOOR!",
+  ],
+  [
+    "level_3",
+    [
+      [
+        VISITED,
+        WALL,
+        WALL,
+        WALL,
+        WALL,
+        WALL,
+        WALL,
+        WALL,
+        WALL,
+        WALL,
+        WALL,
+        WALL,
+      ],
+      [0, WALL, 0, WALL, 0, WALL, 0, 0, 0, KEYS.RED_KEY, 0, 0],
+      [0, WALL, 0, WALL, 0, WALL, 0, WALL, WALL, WALL, WALL, WALL],
+      [0, 0, 0, 0, 0, WALL, 0, 0, 0, 0, 0, WALL],
+      [WALL, WALL, 0, WALL, 0, WALL, 0, DOORS.BLUE_DOOR, 0, 0, 0, WALL],
+      [0, 0, 0, WALL, 0, WALL, 0, 0, 0, 0, 0, 0],
+      [0, WALL, WALL, WALL, 0, WALL, WALL, WALL, WALL, WALL, 0, 0],
+      [0, WALL, 0, 0, 0, DOORS.GREEN_DOOR, 0, 0, 0, 0, 0, 0],
+      [0, WALL, 0, 0, 0, WALL, WALL, WALL, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, WALL, 0, WALL, WALL, WALL],
+      [0, 0, 0, 0, 0, 0, 0, WALL, 0, DOORS.RED_DOOR, 0, KEYS.BLUE_KEY],
+      [KEYS.GREEN_KEY, 0, 0, 0, 0, 0, 0, WALL, 0, WALL, WALL, WALL],
+    ],
+    12,
+    "Open the BLUE DOOR!",
   ],
 ];

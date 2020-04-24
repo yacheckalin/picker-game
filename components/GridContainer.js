@@ -42,13 +42,13 @@ class GridContainer extends React.PureComponent {
       pointerColIndex: 0,
       pointerRowIndex: 0,
       gridMap: this.props.mapper,
-      gridSize: 8,
+      gridSize: this.props.size,
       backpack: [0, 0, 0, 0, 0, 0, 0, 0],
       backPackSize: 8,
       levelPassed: false,
     };
   }
-  
+
   observe() {
     const { pointerColIndex: y, pointerRowIndex: x, gridMap } = this.state;
 
@@ -267,6 +267,7 @@ class GridContainer extends React.PureComponent {
   recalculateCellSize() {
     const containerWidth = document.getElementById("grid-container")
       .clientWidth;
+      console.log(`container-widht: ${containerWidth}, grid-size: ${this.state.gridSize}, cell-size: ${Math.floor(containerWidth / this.state.gridSize)}`)
     this.setState({
       containerWidth,
       cellSize: Math.floor(containerWidth / this.state.gridSize),

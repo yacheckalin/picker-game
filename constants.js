@@ -6,7 +6,7 @@ export const KEYS = {
 export const DOORS = {
   BLUE_DOOR: [90, "BLUE"],
   GREEN_DOOR: [91, "GREEN"],
-  RED_DOOR: [22, "RED"],
+  RED_DOOR: [92, "RED"],
 };
 export const WALL = 1;
 export const VISITED = 8;

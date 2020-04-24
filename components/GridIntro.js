@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { LEVELS } from "../levels";
 
 const GridIntro = ({ loadHandler }) => {
@@ -16,10 +16,13 @@ const GridIntro = ({ loadHandler }) => {
     };
   });
 
+  const [mission, setMission] = useState("Open the BLUE DOOR!");
+
   const handleLevelChange = (e) => {
     const { value } = e.target;
 
     if (LEVELS[parseInt(value)] !== undefined) {
+      setMission(LEVELS[parseInt(value)][3]);
       loadHandler(LEVELS[parseInt(value)]);
     }
   };
@@ -53,9 +56,7 @@ const GridIntro = ({ loadHandler }) => {
             <div className="collapsible-header">
               <i className="material-icons">beach_access</i>The Mission:
             </div>
-            <div className="collapsible-body">
-              The mission is to find the exit from the room!
-            </div>
+            <div className="collapsible-body">{mission}</div>
           </li>
           <li>
             <div className="collapsible-header">
