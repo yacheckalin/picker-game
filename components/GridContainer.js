@@ -42,7 +42,7 @@ class GridContainer extends React.PureComponent {
       pointerColIndex: 0,
       pointerRowIndex: 0,
       gridMap: [
-        [VISITED, 0, 1, 1, 1, 1, 1, 1],
+        [VISITED, 0, WALL, WALL, 1, 1, 1, 1],
         [1, 0, 1, 0, 0, 0, KEYS.RED_KEY, 1],
         [1, 0, 1, 0, 1, 1, 1, 1],
         [1, 0, 1, 0, 1, 0, KEYS.BLUE_KEY, 1],
@@ -63,14 +63,32 @@ class GridContainer extends React.PureComponent {
 
     switch (gridMap[x][y]) {
       case DOORS.GREEN_DOOR:
+        this.props.handleMessage(
+          `You've found the ${DOORS.GREEN_DOOR[1]} door!`
+        );
+        break;
       case DOORS.RED_DOOR:
+        this.props.handleMessage(`You've found the ${DOORS.RED_DOOR[1]} door!`);
+        break;
       case DOORS.BLUE_DOOR:
-        this.props.handleMessage(`You've found the door!`);
+        this.props.handleMessage(
+          `You've found the ${DOORS.BLUE_DOOR[1]} door!`
+        );
         break;
       case KEYS.GREEN_KEY:
+        this.props.handleMessage(
+          `There is a ${KEYS.GREEN_KEY[1]} key, do you wanna pick it up?`
+        );
+        break;
       case KEYS.RED_KEY:
-      case KEYS.GREEN_KEY:
-        this.props.handleMessage(`There is a KEY, do you wanna pick it up?`);
+        this.props.handleMessage(
+          `There is a ${KEYS.RED_KEY[1]} key, do you wanna pick it up?`
+        );
+        break;
+      case KEYS.BLUE_KEY:
+        this.props.handleMessage(
+          `There is a ${KEYS.BLUE_KEY[1]} key, do you wanna pick it up?`
+        );
         break;
       case WALL:
         this.props.handleMessage(`There is a WALL`);
@@ -98,7 +116,7 @@ class GridContainer extends React.PureComponent {
         this.props.handleMessage(`You've found exit! You WIN!`);
         this.setState({ levelPassed: true });
       } else {
-        this.props.handleMessage(`You don't have a key in your BAG!`);
+        this.props.handleMessage(`You don't have the right KEY in your BAG!`);
       }
     } else {
       this.props.handleMessage("There is no door!");
@@ -112,12 +130,13 @@ class GridContainer extends React.PureComponent {
       let firstZeroIndex = this.state.backpack.findIndex((item) => !item);
       const backpack = Array.from(this.state.backpack);
       backpack[firstZeroIndex] = gridMap[x][y];
+      const oldValue = gridMap[x][y];
       gridMap[x][y] = VISITED; // mark as visited
 
       this.setState({ backpack });
       this.setState({ gridMap });
 
-      this.props.handleMessage(`You've picked a KEY!`);
+      this.props.handleMessage(`You've picked a ${oldValue[1]} KEY!`);
     } else {
       this.props.handleMessage(`There is nothing to pick up!`);
     }
