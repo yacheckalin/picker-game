@@ -11,7 +11,7 @@ const GridRow = React.memo(({ data, cellSize }) => (
   <tr>
     {data.map((col, index) => (
       <StyledCell key={index} width={cellSize} height={cellSize}>
-        &nbsp;{col}
+        &nbsp;
       </StyledCell>
     ))}
   </tr>

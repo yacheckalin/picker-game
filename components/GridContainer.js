@@ -223,7 +223,6 @@ class GridContainer extends React.PureComponent {
           height={this.state.cellSize}
           left={this.state.pointerX}
           top={this.state.pointerY}
-          onClick={(e) => alert("clicked")}
         />
       </div>
     );

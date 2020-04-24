@@ -8,6 +8,7 @@ class Playground extends React.Component {
 
     this.state = {
       logMessage: "You can make a move! [right, left, up, down, space]",
+      mission: "The mission is to find exit!",
     };
 
     this.handleLogMessage = this.handleLogMessage.bind(this);
@@ -19,6 +20,7 @@ class Playground extends React.Component {
   render() {
     return (
       <div className="row">
+        <GridInfo>{this.state.mission}</GridInfo>
         <GridContainer handleMessage={this.handleLogMessage} />
         <GridMessage log={this.state.logMessage} />
       </div>
@@ -27,3 +29,9 @@ class Playground extends React.Component {
 }
 
 export default Playground;
+
+const GridInfo = (props) => (
+  <div className="col s12 card-panel lime lighten-4">
+    <blockquote>{props.children}</blockquote>
+  </div>
+);
