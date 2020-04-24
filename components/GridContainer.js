@@ -56,11 +56,24 @@ class GridContainer extends React.PureComponent {
       gridMap,
     } = this.state;
 
-    if (gridMap[x][y] == 9) {
-      this.props.handleMessage(`You've found the EXIT!`);
-    }
-    if (gridMap[x][y] == 2) {
-      this.props.handleMessage(`There is a KEY, do you wanna pick it up?`);
+    switch (gridMap[x][y]) {
+      case 9:
+        this.props.handleMessage(`You've found the EXIT!`);
+        break;
+      case 2:
+        this.props.handleMessage(`There is a KEY, do you wanna pick it up?`);
+        break;
+      case 1:
+        this.props.handleMessage(`There is a WALL`);
+        break;
+      case 0:
+      case 8:
+        this.props.handleMessage(`Just an empty space`);
+        break;
+      default:
+        this.props.handleMessage(
+          `I don't know where I am, and what I'm doing here!`
+        );
     }
   }
   openDoor() {
