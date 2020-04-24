@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Grid from "./Grid";
+import GridModal from "./GridModal";
 
 const Pointer = () => (
   <div>
@@ -55,6 +56,7 @@ class GridContainer extends React.PureComponent {
       ],
       gridSize: 8,
       backpack: [],
+      levelPassed: false,
     };
   }
 
@@ -97,6 +99,7 @@ class GridContainer extends React.PureComponent {
     if (gridMap[x][y] == 9) {
       if (backpack.includes(2)) {
         this.props.handleMessage(`You've found exit! You WIN!`);
+        this.setState({ levelPassed: true });
       } else {
         this.props.handleMessage(`You don't have a key in your BAG!`);
       }
@@ -270,6 +273,9 @@ class GridContainer extends React.PureComponent {
         >
           <i className="material-icons center-align">flare</i>
         </StyledPointer>
+        {this.state.levelPassed && (
+          <GridModal message={"Congratulations you win!!!"} win={true} />
+        )}
       </div>
     );
   }
