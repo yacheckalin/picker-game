@@ -1,0 +1,24 @@
+table,
+th,
+tr,
+td {
+  border: 1px solid black;
+}
+
+.grid-container {
+  padding: 0 !important;
+  position: relative !important;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+.pointer {
+  width: 20px;
+  background-color: yellowgreen;
+  height: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
