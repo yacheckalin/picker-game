@@ -69,7 +69,7 @@ class GridContainer extends React.PureComponent {
   pick() {
     const { pointerColIndex: y, pointerRowIndex: x, gridMap } = this.state;
     if (gridMap[x][y] == 2) {
-      gridMap[x][y] = 0;
+      gridMap[x][y] = 8; // mark as visited
       let backpack = this.state.backpack.concat(2);
       this.setState({ backpack });
       this.setState({ gridMap });
@@ -87,6 +87,11 @@ class GridContainer extends React.PureComponent {
       gridMap[x][y] !== undefined &&
       gridMap[x][y] != 1
     ) {
+      // mark as already visited if it's not a KEY or EXIT
+      if (gridMap[x][y] != 9 && gridMap[x][y] != 2) {
+        gridMap[x][y] = 8;
+      }
+      this.setState({ gridMap });
       this.setState({ pointerRowIndex: x, pointerColIndex: y });
       return true;
     }
