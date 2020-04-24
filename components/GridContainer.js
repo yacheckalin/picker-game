@@ -91,6 +91,9 @@ class GridContainer extends React.PureComponent {
       if (gridMap[x][y] != 9 && gridMap[x][y] != 2) {
         gridMap[x][y] = 8;
       }
+      if (gridMap[x][y] == 9) {
+        this.props.handleMessage(`You've found the EXIT!`);
+      }
       this.setState({ gridMap });
       this.setState({ pointerRowIndex: x, pointerColIndex: y });
       return true;

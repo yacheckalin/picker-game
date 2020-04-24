@@ -30,8 +30,8 @@ class Playground extends React.Component {
 
 export default Playground;
 
-const GridInfo = (props) => (
+const GridInfo = React.memo((props) => (
   <div className="col s12 card-panel lime lighten-4">
     <blockquote>{props.children}</blockquote>
   </div>
-);
+));
