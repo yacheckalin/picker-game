@@ -44,7 +44,6 @@ class GridContainer extends React.PureComponent {
       gridMap: this.props.mapper,
       gridSize: this.props.size,
       backpack: new Array(this.props.size).fill(0),
-      backPackSize: 8,
       levelPassed: false,
     };
   }
@@ -122,6 +121,9 @@ class GridContainer extends React.PureComponent {
         gridMap[x][y - 1] = VISITED;
     };
 
+    const useKey = (backpack, key) =>
+      (backpack[backpack.findIndex((item) => item == key)] = 0);
+
     if (Object.values(DOORS).includes(gridMap[x][y])) {
       // check the right key in a backpack
       if (backpack.includes(keyToDoorMapper(gridMap[x][y]))) {
@@ -131,8 +133,11 @@ class GridContainer extends React.PureComponent {
           this.setState({ levelPassed: true });
         } else {
           // mark as visited
-          gridMap[x][y] = VISITED;
           breakWalls(gridMap, x, y);
+          // remove key from backpack
+          useKey(backpack, keyToDoorMapper(gridMap[x][y]));
+          gridMap[x][y] = VISITED;
+
           this.setState({ gridMap });
           this.forceUpdate();
         }
