@@ -10,3 +10,11 @@ export const stuffColorPicker = (key) => {
       return "red";
   }
 };
+
+export const isElementKey = (key) => {
+  // for (const [k, v] of Object.values(KEYS)) {
+  //   if (v === key) return true;
+  // }
+  // return false;
+  return Object.values(KEYS).includes(key);
+};

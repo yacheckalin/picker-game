@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { KEYS } from "../constants";
-import { stuffColorPicker } from "../helpers";
+import { stuffColorPicker, isElementKey } from "../helpers";
 
 const StyledCell = styled.td`
   width: ${(prop) => prop.width}px;
@@ -12,12 +12,6 @@ const StyledCell = styled.td`
 `;
 
 const BackPack = ({ data, cellSize }) => {
-  const keyCheck = (key) => {
-    for (const [k, v] of Object.entries(KEYS)) {
-      if (v === key) return true;
-    }
-    return false;
-  };
   return (
     <table>
       <tbody>
@@ -28,7 +22,7 @@ const BackPack = ({ data, cellSize }) => {
               height={cellSize}
               className="green center stack-key"
             >
-              {keyCheck(el) && (
+              {isElementKey(el) && (
                 <i
                   className={`material-icons  text-darken-4 ${stuffColorPicker(
                     el

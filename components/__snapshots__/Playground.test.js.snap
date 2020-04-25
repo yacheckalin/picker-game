@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Playground /> render and displays properly 1`] = `
+<div
+  className="row"
+>
+  <GridIntro
+    loadHandler={[Function]}
+  />
+  <GridContainer
+    handleMessage={[Function]}
+    key="level_default"
+    mapper={
+      Array [
+        Array [
+          8,
+          0,
+          1,
+          0,
+        ],
+        Array [
+          0,
+          1,
+          0,
+          Array [
+            90,
+            "BLUE",
+          ],
+        ],
+        Array [
+          0,
+          1,
+          0,
+          0,
+        ],
+        Array [
+          0,
+          0,
+          0,
+          Array [
+            20,
+            "BLUE",
+          ],
+        ],
+      ]
+    }
+    size={4}
+  />
+  <Memo()
+    log="You can make a move! [right, left, up, down, space, alt, enter]"
+  />
+</div>
+`;
