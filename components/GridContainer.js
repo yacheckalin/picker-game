@@ -4,6 +4,8 @@ import Grid from "./Grid";
 import GridModal from "./GridModal";
 import BackPack from "./BackPack";
 
+import PropTypes from "prop-types";
+
 import {
   KEYS,
   DOORS,
@@ -346,5 +348,11 @@ class GridContainer extends React.PureComponent {
     );
   }
 }
+
+GridContainer.propTypes = {
+  handleMessage: PropTypes.func.isRequired,
+  mapper: PropTypes.array.isRequired,
+  size: PropTypes.number.isRequired,
+};
 
 export default GridContainer;

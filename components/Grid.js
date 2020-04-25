@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 const StyledCell = styled.td`
   width: ${(prop) => prop.width}px;
@@ -28,5 +29,10 @@ const Grid = ({ data, cellSize }) => (
     </tbody>
   </table>
 );
+
+Grid.propTypes = {
+  data: PropTypes.array.isRequired,
+  cellSize: PropTypes.number.isRequired,
+};
 
 export default Grid;

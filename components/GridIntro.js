@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { LEVELS } from "../levels";
+import PropTypes from "prop-types";
 
 const GridIntro = ({ loadHandler }) => {
   useEffect(() => {
@@ -93,6 +94,10 @@ const GridIntro = ({ loadHandler }) => {
       </blockquote>
     </div>
   );
+};
+
+GridIntro.propTypes = {
+  loadHandler: PropTypes.func.isRequired,
 };
 
 export default GridIntro;

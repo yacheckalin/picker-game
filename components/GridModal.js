@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 
 const GridModal = ({ message, win = false }) => {
   useEffect(() => {
@@ -28,6 +29,13 @@ const GridModal = ({ message, win = false }) => {
       </div>
     </div>
   );
+};
+GridModal.propTypes = {
+  message: PropTypes.string,
+  win: PropTypes.bool.isRequired,
+};
+GridModal.defaultProps = {
+  win: false,
 };
 
 export default GridModal;

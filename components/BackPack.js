@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import PropTypes from 'prop-types';
 
 import { KEYS } from "../constants";
 import { stuffColorPicker, isElementKey } from "../helpers";
@@ -38,5 +39,10 @@ const BackPack = ({ data, cellSize }) => {
     </table>
   );
 };
+
+BackPack.propTypes = {
+  data: PropTypes.array,
+  cellSize: PropTypes.number.isRequired
+}
 
 export default BackPack;
