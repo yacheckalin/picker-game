@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-import { KEYS } from "../constants";
 import { stuffColorPicker, isElementKey } from "../helpers";
 
 const StyledCell = styled.td`
@@ -42,7 +41,7 @@ const BackPack = ({ data, cellSize }) => {
 
 BackPack.propTypes = {
   data: PropTypes.array,
-  cellSize: PropTypes.number.isRequired
-}
+  cellSize: PropTypes.number.isRequired,
+};
 
 export default BackPack;
