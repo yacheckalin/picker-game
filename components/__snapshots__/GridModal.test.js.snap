@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<GridModal /> renders and displays properly 1`] = `
+<div
+  className="modal"
+  id="win-modal"
+>
+  <div
+    className="modal-content center"
+  >
+    <h4>
+      Winning message!
+    </h4>
+  </div>
+  <div
+    className="modal-footer center"
+  >
+    <a
+      className="modal-close waves-effect waves-green btn-flat"
+      href="#!"
+    >
+      Close
+    </a>
+  </div>
+</div>
+`;

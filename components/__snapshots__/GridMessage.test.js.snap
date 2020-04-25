@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<GridMessage /> renders and displays properly 1`] = `
+<div
+  className="col s12 card-panel"
+>
+  <blockquote>
+    Some log message here
+  </blockquote>
+</div>
+`;

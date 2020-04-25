@@ -1,0 +1,146 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<BackPack /> renders and displays properly 1`] = `
+<BackPack
+  cellSize={20}
+  data={
+    Array [
+      0,
+      0,
+      0,
+      Array [
+        21,
+        "GREEN",
+      ],
+      0,
+      0,
+      Array [
+        20,
+        "BLUE",
+      ],
+    ]
+  }
+>
+  <table>
+    <tbody>
+      <tr
+        key="0"
+      >
+        <styled.td
+          className="green center stack-key"
+          height={20}
+          width={20}
+        >
+          <td
+            className="sc-AxjAm btICiB green center stack-key"
+            height={20}
+            width={20}
+          />
+        </styled.td>
+      </tr>
+      <tr
+        key="1"
+      >
+        <styled.td
+          className="green center stack-key"
+          height={20}
+          width={20}
+        >
+          <td
+            className="sc-AxjAm btICiB green center stack-key"
+            height={20}
+            width={20}
+          />
+        </styled.td>
+      </tr>
+      <tr
+        key="2"
+      >
+        <styled.td
+          className="green center stack-key"
+          height={20}
+          width={20}
+        >
+          <td
+            className="sc-AxjAm btICiB green center stack-key"
+            height={20}
+            width={20}
+          />
+        </styled.td>
+      </tr>
+      <tr
+        key="3"
+      >
+        <styled.td
+          className="green center stack-key"
+          height={20}
+          width={20}
+        >
+          <td
+            className="sc-AxjAm btICiB green center stack-key"
+            height={20}
+            width={20}
+          >
+            <i
+              className="material-icons  text-darken-4 green-text"
+            >
+              vpn_key
+            </i>
+          </td>
+        </styled.td>
+      </tr>
+      <tr
+        key="4"
+      >
+        <styled.td
+          className="green center stack-key"
+          height={20}
+          width={20}
+        >
+          <td
+            className="sc-AxjAm btICiB green center stack-key"
+            height={20}
+            width={20}
+          />
+        </styled.td>
+      </tr>
+      <tr
+        key="5"
+      >
+        <styled.td
+          className="green center stack-key"
+          height={20}
+          width={20}
+        >
+          <td
+            className="sc-AxjAm btICiB green center stack-key"
+            height={20}
+            width={20}
+          />
+        </styled.td>
+      </tr>
+      <tr
+        key="6"
+      >
+        <styled.td
+          className="green center stack-key"
+          height={20}
+          width={20}
+        >
+          <td
+            className="sc-AxjAm btICiB green center stack-key"
+            height={20}
+            width={20}
+          >
+            <i
+              className="material-icons  text-darken-4 blue-text"
+            >
+              vpn_key
+            </i>
+          </td>
+        </styled.td>
+      </tr>
+    </tbody>
+  </table>
+</BackPack>
+`;
