@@ -39,7 +39,7 @@ const GridIntro = ({ loadHandler }) => {
             <div className="collapsible-body">
               <div className="input-field ">
                 <select onChange={handleLevelChange}>
-                  <option value="0" disabled defaultValue>
+                  <option value="" disabled>
                     Choose your level
                   </option>
                   {LEVELS.map((level, index) => (

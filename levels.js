@@ -10,7 +10,7 @@ export const LEVELS = [
       [0, 0, 0, KEYS.BLUE_KEY],
     ],
     4,
-    "Test",
+    "Pick the blue key and open the blue door",
   ],
   [
     "level_1", // the map hash
@@ -26,7 +26,7 @@ export const LEVELS = [
       [1, 1, 1, 1, 1, 1, 1, 1],
     ],
     8, // size of map
-    "Open the BLUE DOOR!", // mission
+    "Open the blue door to find exit!", // mission
   ],
   [
     "level_2",
@@ -41,7 +41,7 @@ export const LEVELS = [
       [1, 1, 1, 1, 1, 1, 1, 1],
     ],
     8,
-    "Open the BLUE DOOR!",
+    "Open the blue door to find exit!",
   ],
   [
     "level_3",
@@ -73,6 +73,6 @@ export const LEVELS = [
       [KEYS.GREEN_KEY, 0, 0, 0, 0, 0, 0, WALL, 0, WALL, WALL, WALL],
     ],
     12,
-    "Open the BLUE DOOR!",
+    "Open the blue door to find exit!",
   ],
 ];

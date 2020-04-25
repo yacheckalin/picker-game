@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import GridContainer from "./GridContainer";
+import React, { useState, Suspense } from "react";
 import GridMessage from "./GridMessage";
 import GridIntro from "./GridIntro";
+import GridContainer from "./GridContainer";
 
 import { DEFAULT_FIELD_SIZE, DEFAUTL_FIELD_HASH } from "../constants";
 
@@ -24,7 +24,6 @@ const Playground = () => {
   return (
     <div className="row">
       <GridIntro loadHandler={handleLoadLevel} />
-
       <GridContainer
         handleMessage={setLogMessage}
         mapper={grid}
