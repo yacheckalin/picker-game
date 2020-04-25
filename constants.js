@@ -9,5 +9,6 @@ export const DOORS = {
   RED_DOOR: [92, "RED"],
 };
 export const WALL = 1;
+export const WALL_D = 2; // walls behind the door
 export const VISITED = 8;
 export const EMPTY = 0;

@@ -1,4 +1,4 @@
-import { KEYS, DOORS, WALL, VISITED } from "./constants";
+import { KEYS, DOORS, WALL, VISITED, WALL_D } from "./constants";
 
 export const LEVELS = [
   [
@@ -55,10 +55,10 @@ export const LEVELS = [
       [WALL, WALL, 0, WALL, 0, WALL, 0, DOORS.BLUE_DOOR, 0, 0, 0, WALL],
       [0, 0, 0, WALL, 0, WALL, 0, 0, 0, 0, 0, 0],
       [0, WALL, WALL, WALL, 0, WALL, WALL, WALL, WALL, WALL, 0, 0],
-      [0, WALL, 0, 0, 0, DOORS.GREEN_DOOR, 0, 0, 0, 0, 0, 0],
+      [0, WALL, 0, 0, 0, DOORS.GREEN_DOOR, WALL_D, 0, 0, 0, 0, 0],
       [0, WALL, 0, 0, 0, WALL, WALL, WALL, 0, 0, 0, 0],
       [0, 0, 0, 0, 0, 0, 0, WALL, 0, WALL, WALL, WALL],
-      [0, 0, 0, 0, 0, 0, 0, WALL, 0, DOORS.RED_DOOR, 0, KEYS.BLUE_KEY],
+      [0, 0, 0, 0, 0, 0, 0, WALL, 0, DOORS.RED_DOOR, WALL_D, KEYS.BLUE_KEY],
       [KEYS.GREEN_KEY, 0, 0, 0, 0, 0, 0, WALL, 0, WALL, WALL, WALL],
     ],
     12,

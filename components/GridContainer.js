@@ -4,7 +4,7 @@ import Grid from "./Grid";
 import GridModal from "./GridModal";
 import BackPack from "./BackPack";
 
-import { KEYS, DOORS, WALL, VISITED, EMPTY } from "../constants";
+import { KEYS, DOORS, WALL, VISITED, EMPTY, WALL_D } from "../constants";
 
 const StyledPointer = styled.div`
   width: ${(props) => props.width}px;
@@ -81,9 +81,6 @@ class GridContainer extends React.PureComponent {
           `There is a ${KEYS.BLUE_KEY[1]} key, do you wanna pick it up?`
         );
         break;
-      case WALL:
-        this.props.handleMessage(`There is a WALL`);
-        break;
       case EMPTY:
       case VISITED:
         this.props.handleMessage(`Just an empty space`);
@@ -102,10 +99,37 @@ class GridContainer extends React.PureComponent {
       gridMap,
     } = this.state;
 
-    if (gridMap[x][y] == DOORS.BLUE_DOOR) {
-      if (backpack.includes(KEYS.BLUE_KEY)) {
-        this.props.handleMessage(`You've found exit! You WIN!`);
-        this.setState({ levelPassed: true });
+    const keyToDoorMapper = ([doorIndex, doorTag]) => {
+      switch (doorTag) {
+        case "GREEN":
+          return KEYS.GREEN_KEY;
+        case "BLUE":
+          return KEYS.BLUE_KEY;
+        case "RED":
+          return KEYS.RED_KEY;
+      }
+    };
+
+    const isExit = (door) => door === DOORS.BLUE_DOOR;
+    const breakWalls = (grid, x, y) => {
+      if (grid[x + 1][y] == WALL_D) gridMap[x + 1][y] = VISITED;
+      if (grid[x - 1][y] == WALL_D) gridMap[x - 1][y] = VISITED;
+      if (grid[x][y + 1] == WALL_D) gridMap[x][y + 1] = VISITED;
+      if (grid[x][y - 1] == WALL_D) gridMap[x][y - 1] = VISITED;
+    };
+
+    if (Object.values(DOORS).includes(gridMap[x][y])) {
+      // check the right key in a backpack
+      if (backpack.includes(keyToDoorMapper(gridMap[x][y]))) {
+        // if BLUE_DOOR then you win
+        if (isExit(gridMap[x][y])) {
+          this.props.handleMessage(`You've found exit! You WIN!`);
+          this.setState({ levelPassed: true });
+        } else {
+          // mark as visited
+          gridMap[x][y] = VISITED;
+          breakWalls(gridMap, x, y);
+        }
       } else {
         this.props.handleMessage(`You don't have the right KEY in your BAG!`);
       }
@@ -138,7 +162,8 @@ class GridContainer extends React.PureComponent {
     if (
       gridMap[x] !== undefined &&
       gridMap[x][y] !== undefined &&
-      gridMap[x][y] != WALL
+      gridMap[x][y] != WALL &&
+      gridMap[x][y] != WALL_D
     ) {
       // mark as already visited if it's not a KEY or EXIT
       if (
@@ -267,7 +292,11 @@ class GridContainer extends React.PureComponent {
   recalculateCellSize() {
     const containerWidth = document.getElementById("grid-container")
       .clientWidth;
-      console.log(`container-widht: ${containerWidth}, grid-size: ${this.state.gridSize}, cell-size: ${Math.floor(containerWidth / this.state.gridSize)}`)
+    console.log(
+      `container-widht: ${containerWidth}, grid-size: ${
+        this.state.gridSize
+      }, cell-size: ${Math.floor(containerWidth / this.state.gridSize)}`
+    );
     this.setState({
       containerWidth,
       cellSize: Math.floor(containerWidth / this.state.gridSize),
