@@ -29,7 +29,11 @@ const BackPack = ({ data, cellSize }) => {
               className="green center stack-key"
             >
               {keyCheck(el) && (
-                <i className={`material-icons ${stuffColorPicker(el)}`}>
+                <i
+                  className={`material-icons  text-darken-4 ${stuffColorPicker(
+                    el
+                  )}-text`}
+                >
                   vpn_key
                 </i>
               )}
