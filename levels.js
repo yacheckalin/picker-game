@@ -2,6 +2,17 @@ import { KEYS, DOORS, WALL, VISITED, WALL_D } from "./constants";
 
 export const LEVELS = [
   [
+    "level_zero",
+    [
+      [VISITED, 0, WALL, 0],
+      [0, WALL, 0, DOORS.BLUE_DOOR],
+      [0, WALL, 0, 0],
+      [0, 0, 0, KEYS.BLUE_KEY],
+    ],
+    4,
+    "Test",
+  ],
+  [
     "level_1", // the map hash
     [
       // the map

@@ -43,7 +43,7 @@ class GridContainer extends React.PureComponent {
       pointerRowIndex: 0,
       gridMap: this.props.mapper,
       gridSize: this.props.size,
-      backpack: [0, 0, 0, 0, 0, 0, 0, 0],
+      backpack: new Array(this.props.size).fill(0),
       backPackSize: 8,
       levelPassed: false,
     };
@@ -112,10 +112,14 @@ class GridContainer extends React.PureComponent {
 
     const isExit = (door) => door === DOORS.BLUE_DOOR;
     const breakWalls = (grid, x, y) => {
-      if (grid[x + 1][y] == WALL_D) gridMap[x + 1][y] = VISITED;
-      if (grid[x - 1][y] == WALL_D) gridMap[x - 1][y] = VISITED;
-      if (grid[x][y + 1] == WALL_D) gridMap[x][y + 1] = VISITED;
-      if (grid[x][y - 1] == WALL_D) gridMap[x][y - 1] = VISITED;
+      if (grid[x + 1] !== undefined && grid[x + 1][y] == WALL_D)
+        gridMap[x + 1][y] = VISITED;
+      if (grid[x - 1] !== undefined && grid[x - 1][y] == WALL_D)
+        gridMap[x - 1][y] = VISITED;
+      if (grid[x][y + 1] !== undefined && grid[x][y + 1] == WALL_D)
+        gridMap[x][y + 1] = VISITED;
+      if (grid[x][y - 1] !== undefined && grid[x][y - 1] == WALL_D)
+        gridMap[x][y - 1] = VISITED;
     };
 
     if (Object.values(DOORS).includes(gridMap[x][y])) {
@@ -129,6 +133,8 @@ class GridContainer extends React.PureComponent {
           // mark as visited
           gridMap[x][y] = VISITED;
           breakWalls(gridMap, x, y);
+          this.setState({ gridMap });
+          this.forceUpdate();
         }
       } else {
         this.props.handleMessage(`You don't have the right KEY in your BAG!`);
@@ -292,18 +298,13 @@ class GridContainer extends React.PureComponent {
   recalculateCellSize() {
     const containerWidth = document.getElementById("grid-container")
       .clientWidth;
-    console.log(
-      `container-widht: ${containerWidth}, grid-size: ${
-        this.state.gridSize
-      }, cell-size: ${Math.floor(containerWidth / this.state.gridSize)}`
-    );
     this.setState({
       containerWidth,
       cellSize: Math.floor(containerWidth / this.state.gridSize),
     });
   }
   render() {
-    const { gridMap, backpack } = this.state;
+    const { gridMap, backpack, gridSize } = this.state;
 
     return (
       <>
