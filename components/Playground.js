@@ -1,4 +1,4 @@
-import React, { useState, Suspense } from "react";
+import React, { useState } from "react";
 import GridMessage from "./GridMessage";
 import GridIntro from "./GridIntro";
 import GridContainer from "./GridContainer";
