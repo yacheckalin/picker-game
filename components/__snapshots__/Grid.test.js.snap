@@ -1,0 +1,288 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Grid /> renders and displays properly 1`] = `
+<Grid
+  cellSize={40}
+  data={
+    Array [
+      Array [
+        8,
+        0,
+        1,
+        0,
+      ],
+      Array [
+        0,
+        1,
+        0,
+        Array [
+          90,
+          "BLUE",
+        ],
+      ],
+      Array [
+        0,
+        1,
+        0,
+        0,
+      ],
+      Array [
+        0,
+        0,
+        0,
+        Array [
+          20,
+          "BLUE",
+        ],
+      ],
+    ]
+  }
+>
+  <table
+    className="centered grid"
+  >
+    <tbody>
+      <tr
+        key="0"
+      >
+        <styled.td
+          className="light-green lighten-4"
+          height={40}
+          key="0"
+          width={40}
+        >
+          <td
+            className="sc-AxjAm dfJKjN light-green lighten-4"
+            height={40}
+            width={40}
+          >
+             
+          </td>
+        </styled.td>
+        <styled.td
+          className=""
+          height={40}
+          key="1"
+          width={40}
+        >
+          <td
+            className="sc-AxjAm dfJKjN"
+            height={40}
+            width={40}
+          >
+             
+          </td>
+        </styled.td>
+        <styled.td
+          className=""
+          height={40}
+          key="2"
+          width={40}
+        >
+          <td
+            className="sc-AxjAm dfJKjN"
+            height={40}
+            width={40}
+          >
+             
+          </td>
+        </styled.td>
+        <styled.td
+          className=""
+          height={40}
+          key="3"
+          width={40}
+        >
+          <td
+            className="sc-AxjAm dfJKjN"
+            height={40}
+            width={40}
+          >
+             
+          </td>
+        </styled.td>
+      </tr>
+      <tr
+        key="1"
+      >
+        <styled.td
+          className=""
+          height={40}
+          key="0"
+          width={40}
+        >
+          <td
+            className="sc-AxjAm dfJKjN"
+            height={40}
+            width={40}
+          >
+             
+          </td>
+        </styled.td>
+        <styled.td
+          className=""
+          height={40}
+          key="1"
+          width={40}
+        >
+          <td
+            className="sc-AxjAm dfJKjN"
+            height={40}
+            width={40}
+          >
+             
+          </td>
+        </styled.td>
+        <styled.td
+          className=""
+          height={40}
+          key="2"
+          width={40}
+        >
+          <td
+            className="sc-AxjAm dfJKjN"
+            height={40}
+            width={40}
+          >
+             
+          </td>
+        </styled.td>
+        <styled.td
+          className=""
+          height={40}
+          key="3"
+          width={40}
+        >
+          <td
+            className="sc-AxjAm dfJKjN"
+            height={40}
+            width={40}
+          >
+             
+          </td>
+        </styled.td>
+      </tr>
+      <tr
+        key="2"
+      >
+        <styled.td
+          className=""
+          height={40}
+          key="0"
+          width={40}
+        >
+          <td
+            className="sc-AxjAm dfJKjN"
+            height={40}
+            width={40}
+          >
+             
+          </td>
+        </styled.td>
+        <styled.td
+          className=""
+          height={40}
+          key="1"
+          width={40}
+        >
+          <td
+            className="sc-AxjAm dfJKjN"
+            height={40}
+            width={40}
+          >
+             
+          </td>
+        </styled.td>
+        <styled.td
+          className=""
+          height={40}
+          key="2"
+          width={40}
+        >
+          <td
+            className="sc-AxjAm dfJKjN"
+            height={40}
+            width={40}
+          >
+             
+          </td>
+        </styled.td>
+        <styled.td
+          className=""
+          height={40}
+          key="3"
+          width={40}
+        >
+          <td
+            className="sc-AxjAm dfJKjN"
+            height={40}
+            width={40}
+          >
+             
+          </td>
+        </styled.td>
+      </tr>
+      <tr
+        key="3"
+      >
+        <styled.td
+          className=""
+          height={40}
+          key="0"
+          width={40}
+        >
+          <td
+            className="sc-AxjAm dfJKjN"
+            height={40}
+            width={40}
+          >
+             
+          </td>
+        </styled.td>
+        <styled.td
+          className=""
+          height={40}
+          key="1"
+          width={40}
+        >
+          <td
+            className="sc-AxjAm dfJKjN"
+            height={40}
+            width={40}
+          >
+             
+          </td>
+        </styled.td>
+        <styled.td
+          className=""
+          height={40}
+          key="2"
+          width={40}
+        >
+          <td
+            className="sc-AxjAm dfJKjN"
+            height={40}
+            width={40}
+          >
+             
+          </td>
+        </styled.td>
+        <styled.td
+          className=""
+          height={40}
+          key="3"
+          width={40}
+        >
+          <td
+            className="sc-AxjAm dfJKjN"
+            height={40}
+            width={40}
+          >
+             
+          </td>
+        </styled.td>
+      </tr>
+    </tbody>
+  </table>
+</Grid>
+`;
