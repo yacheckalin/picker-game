@@ -4,7 +4,15 @@ import Grid from "./Grid";
 import GridModal from "./GridModal";
 import BackPack from "./BackPack";
 
-import { KEYS, DOORS, WALL, VISITED, EMPTY, WALL_D } from "../constants";
+import {
+  KEYS,
+  DOORS,
+  WALL,
+  VISITED,
+  EMPTY,
+  WALL_D,
+  EMPTY_BACKPACK_CELL,
+} from "../constants";
 
 const StyledPointer = styled.div`
   width: ${(props) => props.width}px;
@@ -122,7 +130,9 @@ class GridContainer extends React.PureComponent {
     };
 
     const useKey = (backpack, key) =>
-      (backpack[backpack.findIndex((item) => item == key)] = 0);
+      (backpack[
+        backpack.findIndex((item) => item == key)
+      ] = EMPTY_BACKPACK_CELL);
 
     if (Object.values(DOORS).includes(gridMap[x][y])) {
       // check the right key in a backpack
@@ -309,7 +319,7 @@ class GridContainer extends React.PureComponent {
     });
   }
   render() {
-    const { gridMap, backpack, gridSize } = this.state;
+    const { gridMap, backpack } = this.state;
 
     return (
       <>

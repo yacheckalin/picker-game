@@ -1,55 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import GridContainer from "./GridContainer";
 import GridMessage from "./GridMessage";
 import GridIntro from "./GridIntro";
 
-import { KEYS, DOORS, WALL, VISITED } from "../constants";
+import { DEFAULT_FIELD_SIZE, DEFAUTL_FIELD_HASH } from "../constants";
 
-class Playground extends React.Component {
-  constructor(props) {
-    super(props);
+import { LEVELS } from "../levels";
 
-    this.state = {
-      logMessage:
-        "You can make a move! [right, left, up, down, space, alt, enter]",
-      grid: [
-        [VISITED, 0, WALL, WALL, 1, 1, 1, 1],
-        [1, 0, 1, 0, 0, 0, KEYS.RED_KEY, 1],
-        [1, 0, 1, 0, 1, 1, 1, 1],
-        [1, 0, 1, 0, 1, 0, KEYS.BLUE_KEY, 1],
-        [1, 0, 0, 0, 1, 0, 0, 1],
-        [1, 0, 1, 0, 1, 0, 0, 1],
-        [1, KEYS.GREEN_KEY, 1, 0, 0, 0, 0, DOORS.BLUE_DOOR],
-        [1, 1, 1, 1, 1, 1, 1, 1],
-      ],
-      gridHash: "level_default",
-      gridSize: 8,
-    };
-    this.handleLoadLevel = this.handleLoadLevel.bind(this);
-    this.handleLogMessage = this.handleLogMessage.bind(this);
-  }
+const Playground = () => {
+  const [logMessage, setLogMessage] = useState(
+    "You can make a move! [right, left, up, down, space, alt, enter]"
+  );
+  const [grid, setGrid] = useState(LEVELS[0][1]); // use default level
+  const [gridSize, setGridSize] = useState(DEFAULT_FIELD_SIZE);
+  const [gridHash, setGridHash] = useState(DEFAUTL_FIELD_HASH);
 
-  handleLogMessage(msg) {
-    this.setState({ logMessage: msg });
-  }
-  handleLoadLevel([gridHash, grid, gridSize]) {
-    this.setState({ grid, gridHash, gridSize });
-  }
-  render() {
-    return (
-      <div className="row">
-        <GridIntro loadHandler={this.handleLoadLevel} />
+  const handleLoadLevel = ([gridHash, grid, gridSize]) => {
+    setGrid(grid);
+    setGridHash(gridHash);
+    setGridSize(gridSize);
+  };
 
-        <GridContainer
-          handleMessage={this.handleLogMessage}
-          mapper={this.state.grid}
-          size={this.state.gridSize}
-          key={this.state.gridHash}
-        />
-        <GridMessage log={this.state.logMessage} />
-      </div>
-    );
-  }
-}
+  return (
+    <div className="row">
+      <GridIntro loadHandler={handleLoadLevel} />
+
+      <GridContainer
+        handleMessage={setLogMessage}
+        mapper={grid}
+        size={gridSize}
+        key={gridHash}
+      />
+      <GridMessage log={logMessage} />
+    </div>
+  );
+};
 
 export default Playground;
