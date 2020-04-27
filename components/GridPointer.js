@@ -20,17 +20,15 @@ const StyledPointer = styled.div`
 `;
 
 const GridPointer = ({ width, height, top, left }) => (
-  <>
-    <StyledPointer
-      width={width}
-      height={height}
-      left={left}
-      top={top}
-      className="valign-wrapper"
-    >
-      <i className="material-icons center-align">flare</i>
-    </StyledPointer>
-  </>
+  <StyledPointer
+    width={width}
+    height={height}
+    left={left}
+    top={top}
+    className="valign-wrapper"
+  >
+    <i className="material-icons center-align">flare</i>
+  </StyledPointer>
 );
 
 GridPointer.propTypes = {

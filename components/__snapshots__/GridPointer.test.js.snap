@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<GridPointer /> render and displays properly 1`] = `
+<styled.div
+  className="valign-wrapper"
+  height={100}
+  left={0}
+  top={0}
+  width={100}
+>
+  <i
+    className="material-icons center-align"
+  >
+    flare
+  </i>
+</styled.div>
+`;
