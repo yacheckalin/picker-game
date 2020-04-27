@@ -24,8 +24,7 @@ const GridIntro = ({ loadHandler }) => {
 
   return (
     <div className="col s12 card-panel lime lighten-4">
-      <div className="row"></div>
-      <blockquote>
+      <blockquote className="row">
         <ul className="collapsible" ref={collapsibleRef}>
           <li>
             <div className="collapsible-header">
