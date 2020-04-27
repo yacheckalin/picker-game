@@ -1,5 +1,6 @@
-<center>Welcome to the Picker Game</center>
-<img src='./assets/screenshot.png' />
+<Welcome style="text-align: center">Welcome to the Picker Game</div>
+
+<p><img src='./assets/screenshot.png' /></p>
 
 #### Table of Contents
 
@@ -18,6 +19,8 @@
 The game is a simple Board Game based on js, html, css, react, parcel.
 
 The motivation was ot develop a board game with flexible extendability (adding new levels, adding new objects, adding new behavior).
+
+Initially a map is hidden, and you need to walk through and open it.
 
 #### Getting Started
 
@@ -90,6 +93,9 @@ Levels based on scaffold array
 - DOORS.RED_DOOR - a red door
 - DOORS.GREEN_DOOR - a green door
 - DOORS.BLUE_DOOR - the exit door
+- EMPTY - empty cell
+
+> > The entire list of elements is available here [constants.js](https://github.com/yacheckalin/picker-game/blob/master/constants.js)
 
 #### Adding new level
 
