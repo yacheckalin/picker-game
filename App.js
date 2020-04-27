@@ -1,6 +1,6 @@
 import React from "react";
 import Playground from "./components/Playground";
-import LevelMaker from "./components/LevelMaker/LevelMaker";
+import LevelMakerContainer from "./components/LevelMaker/LevelMakerContainer";
 
 import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
 
@@ -28,7 +28,7 @@ const App = () => {
             <Playground menuBar={true} />
           </Route>
           <Route path="/level-maker">
-            <LevelMaker />
+            <LevelMakerContainer />
           </Route>
         </Switch>
       </div>
