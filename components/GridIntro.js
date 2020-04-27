@@ -1,20 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { LEVELS } from "../levels";
 import PropTypes from "prop-types";
 
 const GridIntro = ({ loadHandler }) => {
-  useEffect(() => {
-    const callback = function () {
-      const elems = document.querySelectorAll(".collapsible");
-      const select = document.querySelectorAll("select");
+  const collapsibleRef = useRef();
+  const selectRef = useRef();
 
-      M.Collapsible.init(elems, {});
-      M.FormSelect.init(select, {});
-    };
-    document.addEventListener("DOMContentLoaded", callback);
-    return () => {
-      document.removeEventListener("DOMContentLoaded", callback);
-    };
+  useEffect(() => {
+    M.Collapsible.init(collapsibleRef.current, {});
+    M.FormSelect.init(selectRef.current, {});
   });
 
   const [mission, setMission] = useState("Open the BLUE DOOR!");
@@ -32,14 +26,14 @@ const GridIntro = ({ loadHandler }) => {
     <div className="col s12 card-panel lime lighten-4">
       <div className="row"></div>
       <blockquote>
-        <ul className="collapsible">
+        <ul className="collapsible" ref={collapsibleRef}>
           <li>
             <div className="collapsible-header">
               <i className="material-icons">flash_on</i> Load Level
             </div>
             <div className="collapsible-body">
               <div className="input-field ">
-                <select onChange={handleLevelChange}>
+                <select onChange={handleLevelChange} ref={selectRef}>
                   <option value="" disabled>
                     Choose your level
                   </option>
