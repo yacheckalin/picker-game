@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Grid from "./Grid";
 import GridModal from "./GridModal";
 import BackPack from "./BackPack";
+import GridPointer from "./GridPointer";
 
 import PropTypes from "prop-types";
 
@@ -16,24 +17,12 @@ import {
   EMPTY_BACKPACK_CELL,
 } from "../constants";
 
-const StyledPointer = styled.div`
-  width: ${(props) => props.width}px;
-  background-color: yellowgreen;
-  height: ${(props) => props.height}px;
-  position: absolute;
-  top: ${(prop) => prop.top}px;
-  left: ${(prop) => prop.left}px;
-  opacity: 0.5;
-
-  i {
-    width: ${(props) => props.width}px;
-  }
-`;
-
 class GridContainer extends React.PureComponent {
   constructor(props) {
     super(props);
     this.recalculateCellSize = this.recalculateCellSize.bind(this);
+    this.recalculatePointerSize = this.recalculatePointerSize.bind(this);
+    this.calculatePointerOffset = this.calculatePointerOffset.bind(this);
     this.handleOnKeyDown = this.handleOnKeyDown.bind(this);
     this.moveUp = this.moveUp.bind(this);
     this.moveDown = this.moveDown.bind(this);
@@ -51,6 +40,9 @@ class GridContainer extends React.PureComponent {
       pointerY: 0,
       pointerColIndex: 0,
       pointerRowIndex: 0,
+      pointerWidth: 0,
+      pointerHeight: 0,
+      borderSize: 1,
       gridMap: this.props.mapper,
       gridSize: this.props.size,
       backpack: new Array(this.props.size).fill(0),
@@ -202,9 +194,23 @@ class GridContainer extends React.PureComponent {
     }
     return false;
   }
+  calculatePointerOffset({ row, col }) {
+    const {
+      offsetWidth,
+      offsetHeight,
+      offsetLeft,
+      offsetTop,
+    } = document.getElementById(`#grid-cell-${row}-${col}`);
 
+    this.setState({
+      pointerX: offsetLeft,
+      pointerY: offsetTop,
+      pointerHeight: offsetHeight,
+      pointerWidth: offsetWidth,
+    });
+  }
   moveRight() {
-    const { pointerX, cellSize, pointerRowIndex, pointerColIndex } = this.state;
+    const { pointerRowIndex, pointerColIndex } = this.state;
 
     if (
       this.checkPointer({
@@ -212,7 +218,11 @@ class GridContainer extends React.PureComponent {
         pointerColIndex: pointerColIndex + 1,
       })
     ) {
-      this.setState({ pointerX: pointerX + cellSize });
+      this.calculatePointerOffset({
+        row: pointerRowIndex,
+        col: pointerColIndex + 1,
+      });
+
       this.props.handleMessage(`You steped to the right!`);
     } else {
       this.props.handleMessage(`You can't move there! There is a wall ...`);
@@ -220,7 +230,7 @@ class GridContainer extends React.PureComponent {
   }
 
   moveLeft() {
-    const { pointerX, cellSize, pointerRowIndex, pointerColIndex } = this.state;
+    const { pointerRowIndex, pointerColIndex } = this.state;
 
     if (
       this.checkPointer({
@@ -228,7 +238,11 @@ class GridContainer extends React.PureComponent {
         pointerColIndex: pointerColIndex - 1,
       })
     ) {
-      this.setState({ pointerX: pointerX - cellSize });
+      this.calculatePointerOffset({
+        row: pointerRowIndex,
+        col: pointerColIndex - 1,
+      });
+
       this.props.handleMessage(`You steped to the left!`);
     } else {
       this.props.handleMessage(`You can't move there! There is a wall ...`);
@@ -236,7 +250,7 @@ class GridContainer extends React.PureComponent {
   }
 
   moveUp() {
-    const { pointerY, cellSize, pointerRowIndex, pointerColIndex } = this.state;
+    const { pointerRowIndex, pointerColIndex } = this.state;
 
     if (
       this.checkPointer({
@@ -244,14 +258,18 @@ class GridContainer extends React.PureComponent {
         pointerColIndex,
       })
     ) {
-      this.setState({ pointerY: pointerY - cellSize });
+      this.calculatePointerOffset({
+        row: pointerRowIndex - 1,
+        col: pointerColIndex,
+      });
+
       this.props.handleMessage(`You steped up!`);
     } else {
       this.props.handleMessage(`You can't move there! There is a wall ...`);
     }
   }
   moveDown() {
-    const { pointerY, cellSize, pointerColIndex, pointerRowIndex } = this.state;
+    const { pointerColIndex, pointerRowIndex } = this.state;
 
     if (
       this.checkPointer({
@@ -259,7 +277,11 @@ class GridContainer extends React.PureComponent {
         pointerRowIndex: pointerRowIndex + 1,
       })
     ) {
-      this.setState({ pointerY: pointerY + cellSize });
+      this.calculatePointerOffset({
+        row: pointerRowIndex + 1,
+        col: pointerColIndex,
+      });
+
       this.props.handleMessage(`You steped down!`);
     } else {
       this.props.handleMessage(`You can't move there! There is a wall ...`);
@@ -305,19 +327,33 @@ class GridContainer extends React.PureComponent {
 
   componentDidMount() {
     this.recalculateCellSize();
+    window.addEventListener("DOMContentLoaded", this.recalculateCellSize);
     window.addEventListener("resize", this.recalculateCellSize);
     window.addEventListener("keydown", this.handleOnKeyDown);
   }
   componentWillUnmount() {
     window.removeEventListener("resize", this.recalculateCellSize);
     window.removeEventListener("keydown", this.handleOnKeyDown);
+    window.removeEventListener("DOMContentLoaded", this.recalculateCellSize);
   }
   recalculateCellSize() {
     const containerWidth = document.getElementById("grid-container")
       .clientWidth;
+
     this.setState({
       containerWidth,
-      cellSize: Math.floor(containerWidth / this.state.gridSize),
+      cellSize: Math.floor(containerWidth / this.state.gridSize) - 1,
+    });
+
+    this.calculatePointerOffset({
+      row: this.state.pointerRowIndex,
+      col: this.state.pointerColIndex,
+    });
+  }
+  recalculatePointerSize({ pointerWidth, pointerHeight }) {
+    this.setState({
+      pointerWidth,
+      pointerHeight,
     });
   }
   render() {
@@ -325,18 +361,18 @@ class GridContainer extends React.PureComponent {
 
     return (
       <>
-        <div className="col s10 blue grid-container" id="grid-container">
-          <Grid data={gridMap} cellSize={this.state.cellSize} />
-
-          <StyledPointer
-            width={this.state.cellSize}
-            height={this.state.cellSize}
-            left={this.state.pointerX}
+        <div className="col s10 grid-container" id="grid-container">
+          <Grid
+            data={gridMap}
+            cellSize={this.state.cellSize}
+            recalculate={this.recalculatePointerSize}
+          />
+          <GridPointer
+            width={this.state.pointerWidth}
+            height={this.state.pointerHeight}
             top={this.state.pointerY}
-            className="valign-wrapper"
-          >
-            <i className="material-icons center-align">flare</i>
-          </StyledPointer>
+            left={this.state.pointerX}
+          />
           {this.state.levelPassed && (
             <GridModal message={"Congratulations you win!!!"} win={true} />
           )}
