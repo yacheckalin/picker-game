@@ -25,7 +25,10 @@ const LMForm = ({ generate }) => {
         </div>
       </div>
       <div className="row">
-        <a className="btn" onClick={(e) => generate(parseInt(mapSize))}>
+        <a
+          className={`btn ${mapSize > MAX_MAP_SIZE ? `disabled` : ``}`}
+          onClick={(e) => generate(parseInt(mapSize))}
+        >
           Generate
         </a>
       </div>
