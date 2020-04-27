@@ -1,11 +1,23 @@
 <center>Welcome to the Picker Game</center>
 <img src='./assets/screenshot.png' />
 
-#### Motivations
+#### Table of Contents
+
+- [Motivation](#motivation)
+- [Getting Started](#getting-started)
+- [Gemeplay](#gameplay)
+- [Building Levels](#building-levels)
+- [Types of map objects](#types-of-map-objects)
+- [Adding new level](#adding-new-level)
+- [TODO](#todo)
+
+#### Motivation
 
 ---
 
 The game is a simple Board Game based on js, html, css, react, parcel.
+
+The motivation was ot develop a board game with flexible extendability (adding new levels, adding new objects, adding new behavior).
 
 #### Getting Started
 
@@ -68,9 +80,7 @@ Levels based on scaffold array
 
 ---
 
-#### Level Tips
-
-Types of objects on a map:
+#### Types of map objects
 
 - KEYS.RED_KEY - a key from red door
 - KEYS.BLUE_KEY - a blue key (key from exit)
@@ -80,6 +90,8 @@ Types of objects on a map:
 - DOORS.RED_DOOR - a red door
 - DOORS.GREEN_DOOR - a green door
 - DOORS.BLUE_DOOR - the exit door
+
+#### Adding new level
 
 > > If you put the DOOR (any but BLUE) on a map, it should be surrounded by <code>WALL || WALL_D</code> with one entry cell.
 
