@@ -27,6 +27,11 @@ const LMForm = ({ generate, gridData }) => {
       setLevel(JSON.stringify(newLevel));
       setInfo(`Data were copyied to localStorage!`);
       setIsSaved(true);
+
+      // re-init form
+      setMapSize(MIN_MAP_SIZE);
+      setMapHash("");
+      setMapMission("");
     } catch (e) {
       setInfo(e.message);
     }
