@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { DEFAULT_CELL_SIZE, MARK_SELECTED } from "./constants";
+import { DEFAULT_CELL_SIZE, MARK_SELECTED, MARK_CLEAR } from "./constants";
 import LMGridTools from "./LMGridTools";
 
 import shortid from "shortid";
@@ -56,6 +56,7 @@ const LMGrid = ({ data, size }) => {
   const [openTool, setOpenTool] = useState(false);
   const [gridWidth, setGridWidth] = useState(0);
   const [isMultipleSelect, setIsMultipleSelect] = useState(false);
+  const [gridData, setGridData] = useState(data);
 
   useEffect(() => {
     const { offsetWidth } = containerRef.current;
@@ -66,11 +67,22 @@ const LMGrid = ({ data, size }) => {
     setCellWidth(cellSize);
   }, [cellWidth, cellHeight, gridWidth]);
 
-  const handleContextMenuCoordinates = (e) => {
+  const handleGridMarking = (e) => {
     const { offsetTop, offsetLeft } = e.target;
 
     setCellTop(offsetTop);
     setCellLeft(offsetLeft);
+    setOpenTool(false);
+
+    const tmp = e.target.id.split("-");
+    if (tmp) {
+      const [y, x] = tmp.splice(-2, 2);
+
+      if (x >= 0 && y >= 0) {
+        gridData[y][x] = e.target.checked ? MARK_SELECTED : MARK_CLEAR;
+        setGridData(gridData);
+      }
+    }
   };
 
   const keypressHandler = (e) => {
@@ -86,7 +98,7 @@ const LMGrid = ({ data, size }) => {
           }
         }
       }
-      setIsMultipleSelect(!!selectedCells.length);
+      setIsMultipleSelect(selectedCells.length > 1 ? true : false);
       setOpenTool(true);
     }
   };
@@ -100,17 +112,18 @@ const LMGrid = ({ data, size }) => {
   return (
     <StyledContainer className="row" ref={containerRef}>
       <div className="col s12 ">
-        {data.map((row, y) => (
+        {gridData.map((row, y) => (
           <StyledRow key={y} className="row">
             {row.map((col, x) => (
               <StyledColumn
                 width={cellWidth}
                 height={cellHeight}
                 key={x}
-                onClick={handleContextMenuCoordinates}
+                onClick={handleGridMarking}
+                id={`lm-grid-cell-${y}-${x}`}
               >
-                <input type="checkbox" id={`lm-grid-cell-${y}-${x}`} />
-                <label htmlFor={`lm-grid-cell-${y}-${x}`}>&nbsp;</label>
+                <input type="checkbox" id={`lm-grid-cell-input-${y}-${x}`} />
+                <label htmlFor={`lm-grid-cell-input-${y}-${x}`}>&nbsp;</label>
               </StyledColumn>
             ))}
           </StyledRow>
