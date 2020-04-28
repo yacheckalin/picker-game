@@ -17,6 +17,8 @@ import {
   EMPTY_BACKPACK_CELL,
 } from "../constants";
 
+import { isElementDoor, isElementKey, isInABackPack } from "../helpers";
+
 class GridContainer extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -53,43 +55,44 @@ class GridContainer extends React.PureComponent {
   observe() {
     const { pointerColIndex: y, pointerRowIndex: x, gridMap } = this.state;
 
-    switch (gridMap[x][y]) {
-      case DOORS.GREEN_DOOR:
+    const compare = (array1, array2) =>
+      array1.length === array2.length &&
+      array1.every((value, index) => value === array2[index]);
+
+    if (Array.isArray(gridMap[x][y])) {
+      if (compare(gridMap[x][y], DOORS.GREEN_DOOR)) {
         this.props.handleMessage(
           `You've found the ${DOORS.GREEN_DOOR[1]} door!`
         );
-        break;
-      case DOORS.RED_DOOR:
+      }
+      if (compare(gridMap[x][y], DOORS.RED_DOOR)) {
         this.props.handleMessage(`You've found the ${DOORS.RED_DOOR[1]} door!`);
-        break;
-      case DOORS.BLUE_DOOR:
+      }
+      if (compare(gridMap[x][y], DOORS.BLUE_DOOR)) {
         this.props.handleMessage(
           `You've found the ${DOORS.BLUE_DOOR[1]} door!`
         );
-        break;
-      case KEYS.GREEN_KEY:
-        this.props.handleMessage(
-          `There is a ${KEYS.GREEN_KEY[1]} key, do you wanna pick it up?`
-        );
-        break;
-      case KEYS.RED_KEY:
-        this.props.handleMessage(
-          `There is a ${KEYS.RED_KEY[1]} key, do you wanna pick it up?`
-        );
-        break;
-      case KEYS.BLUE_KEY:
+      }
+
+      if (compare(gridMap[x][y], KEYS.BLUE_KEY)) {
         this.props.handleMessage(
           `There is a ${KEYS.BLUE_KEY[1]} key, do you wanna pick it up?`
         );
-        break;
-      case EMPTY:
-      case VISITED:
-        this.props.handleMessage(`Just an empty space`);
-        break;
-      default:
+      }
+      if (compare(gridMap[x][y], KEYS.GREEN_KEY)) {
         this.props.handleMessage(
-          `I don't know where I am, and what I'm doing here!`
+          `There is a ${KEYS.GREEN_KEY[1]} key, do you wanna pick it up?`
         );
+      }
+      if (compare(gridMap[x][y], KEYS.RED_KEY)) {
+        this.props.handleMessage(
+          `There is a ${KEYS.RED_KEY[1]} key, do you wanna pick it up?`
+        );
+      }
+    } else {
+      if (gridMap[x][y] === VISITED || gridMap[x][y] === EMPTY) {
+        this.props.handleMessage(`Just an empty space`);
+      }
     }
   }
   openDoor() {
@@ -111,7 +114,8 @@ class GridContainer extends React.PureComponent {
       }
     };
 
-    const isExit = (door) => door === DOORS.BLUE_DOOR;
+    const isExit = ([doorIndex, doorTag]) =>
+      doorIndex === DOORS.BLUE_DOOR[0] && doorTag === DOORS.BLUE_DOOR[1];
     const breakWalls = (grid, x, y) => {
       if (grid[x + 1] !== undefined && grid[x + 1][y] == WALL_D)
         gridMap[x + 1][y] = VISITED;
@@ -128,10 +132,10 @@ class GridContainer extends React.PureComponent {
         backpack.findIndex((item) => item == key)
       ] = EMPTY_BACKPACK_CELL);
 
-    if (Object.values(DOORS).includes(gridMap[x][y])) {
-      // check the right key in a backpack
-      if (backpack.includes(keyToDoorMapper(gridMap[x][y]))) {
-        // if BLUE_DOOR then you win
+    if (isElementDoor(gridMap[x][y])) {
+      // is there a right key in a backpack
+      if (isInABackPack(backpack, gridMap[x][y])) {
+        // if BLUE_DOOR then win
         if (isExit(gridMap[x][y])) {
           this.props.handleMessage(`You've found exit! You WIN!`);
           this.setState({ levelPassed: true });
@@ -156,7 +160,7 @@ class GridContainer extends React.PureComponent {
   pick() {
     const { pointerColIndex: y, pointerRowIndex: x, gridMap } = this.state;
 
-    if (Object.values(KEYS).includes(gridMap[x][y])) {
+    if (isElementKey(gridMap[x][y])) {
       let firstZeroIndex = this.state.backpack.findIndex((item) => !item);
       const backpack = Array.from(this.state.backpack);
       backpack[firstZeroIndex] = gridMap[x][y];
@@ -181,10 +185,7 @@ class GridContainer extends React.PureComponent {
       gridMap[x][y] != WALL_D
     ) {
       // mark as already visited if it's not a KEY or EXIT
-      if (
-        !Object.values(DOORS).includes(gridMap[x][y]) &&
-        !Object.values(KEYS).includes(gridMap[x][y])
-      ) {
+      if (!isElementDoor(gridMap[x][y]) && !isElementKey(gridMap[x][y])) {
         gridMap[x][y] = VISITED;
       }
 

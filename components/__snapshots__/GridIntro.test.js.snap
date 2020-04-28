@@ -4,10 +4,9 @@ exports[`<GridIntro /> render properly 1`] = `
 <div
   className="col s12 card-panel lime lighten-4"
 >
-  <div
+  <blockquote
     className="row"
-  />
-  <blockquote>
+  >
     <ul
       className="collapsible"
     >

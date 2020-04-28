@@ -6,7 +6,7 @@ export const LEVELS = [
     [
       [VISITED, 0, WALL, 0],
       [0, WALL, 0, DOORS.BLUE_DOOR],
-      [0, WALL, 0, 0],
+      [KEYS.BLUE_KEY, WALL, 0, 0],
       [0, 0, 0, KEYS.BLUE_KEY],
     ],
     4,

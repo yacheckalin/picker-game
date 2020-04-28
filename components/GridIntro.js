@@ -1,49 +1,51 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { LEVELS } from "../levels";
 import PropTypes from "prop-types";
 
 const GridIntro = ({ loadHandler }) => {
-  useEffect(() => {
-    const callback = function () {
-      const elems = document.querySelectorAll(".collapsible");
-      const select = document.querySelectorAll("select");
+  const collapsibleRef = useRef();
+  const selectRef = useRef();
 
-      M.Collapsible.init(elems, {});
-      M.FormSelect.init(select, {});
-    };
-    document.addEventListener("DOMContentLoaded", callback);
-    return () => {
-      document.removeEventListener("DOMContentLoaded", callback);
-    };
+  useEffect(() => {
+    M.Collapsible.init(collapsibleRef.current, {});
+    M.FormSelect.init(selectRef.current, {});
   });
 
   const [mission, setMission] = useState("Open the BLUE DOOR!");
 
+  // init levelOptions via localStorage
+  let newData = new Array();
+  for (const level of LEVELS) {
+    newData.push(level);
+  }
+  for (const [hash, data] of Object.entries(window.localStorage)) {
+    newData.push(JSON.parse(JSON.parse(data)));
+  }
+
   const handleLevelChange = (e) => {
     const { value } = e.target;
 
-    if (LEVELS[parseInt(value)] !== undefined) {
-      setMission(LEVELS[parseInt(value)][3]);
-      loadHandler(LEVELS[parseInt(value)]);
+    if (newData[parseInt(value)] !== undefined) {
+      setMission(newData[parseInt(value)][3]);
+      loadHandler(newData[parseInt(value)]);
     }
   };
 
   return (
     <div className="col s12 card-panel lime lighten-4">
-      <div className="row"></div>
-      <blockquote>
-        <ul className="collapsible">
+      <blockquote className="row">
+        <ul className="collapsible" ref={collapsibleRef}>
           <li>
             <div className="collapsible-header">
               <i className="material-icons">flash_on</i> Load Level
             </div>
             <div className="collapsible-body">
               <div className="input-field ">
-                <select onChange={handleLevelChange}>
+                <select onChange={handleLevelChange} ref={selectRef}>
                   <option value="" disabled>
                     Choose your level
                   </option>
-                  {LEVELS.map((level, index) => (
+                  {newData.map((level, index) => (
                     <option key={index} value={index}>
                       {level[0]}
                     </option>
