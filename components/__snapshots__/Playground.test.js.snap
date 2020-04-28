@@ -28,7 +28,10 @@ exports[`<Playground /> render and displays properly 1`] = `
           ],
         ],
         Array [
-          0,
+          Array [
+            20,
+            "BLUE",
+          ],
           1,
           0,
           0,

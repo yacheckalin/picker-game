@@ -1,4 +1,4 @@
-import { KEYS } from "./constants";
+import { KEYS, DOORS, WALL, WALL_D, VISITED } from "./constants";
 
 export const stuffColorPicker = (key) => {
   switch (key) {
@@ -12,5 +12,15 @@ export const stuffColorPicker = (key) => {
 };
 
 export const isElementKey = (key) => {
-  return Object.values(KEYS).includes(key);
+  for (const [code, tag] of Object.values(KEYS)) {
+    if (code === key[0] && tag === key[1]) return true;
+  }
+  return false;
+};
+
+export const isElementDoor = (door) => {
+  for (const [code, tag] of Object.values(DOORS)) {
+    if (code === door[0] && tag === door[1]) return true;
+  }
+  return false;
 };

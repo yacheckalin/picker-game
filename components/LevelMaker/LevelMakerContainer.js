@@ -12,8 +12,6 @@ const LevelMakerContainer = React.memo(() => {
   const [gridHash, setGridHash] = useState(shortid.generate());
 
   const handleGenerate = (size) => {
-    console.log(`grid size: ${size}`);
-
     // generate a matrix size x size
     let grid = [];
     for (let i = 0; i < size; i++) {
@@ -26,7 +24,7 @@ const LevelMakerContainer = React.memo(() => {
 
   return (
     <div className="col s12 card-panel lime lighten-4">
-      <LMForm generate={handleGenerate} />
+      <LMForm generate={handleGenerate} gridData={grid} />
 
       <LMGrid data={grid} size={size} key={gridHash} />
     </div>

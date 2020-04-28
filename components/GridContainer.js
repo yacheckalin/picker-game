@@ -17,6 +17,8 @@ import {
   EMPTY_BACKPACK_CELL,
 } from "../constants";
 
+import { isElementDoor, isElementKey } from "../helpers";
+
 class GridContainer extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -128,7 +130,7 @@ class GridContainer extends React.PureComponent {
         backpack.findIndex((item) => item == key)
       ] = EMPTY_BACKPACK_CELL);
 
-    if (Object.values(DOORS).includes(gridMap[x][y])) {
+    if (isElementDoor(gridMap[x][y])) {
       // check the right key in a backpack
       if (backpack.includes(keyToDoorMapper(gridMap[x][y]))) {
         // if BLUE_DOOR then you win
@@ -156,7 +158,7 @@ class GridContainer extends React.PureComponent {
   pick() {
     const { pointerColIndex: y, pointerRowIndex: x, gridMap } = this.state;
 
-    if (Object.values(KEYS).includes(gridMap[x][y])) {
+    if (isElementKey(gridMap[x][y])) {
       let firstZeroIndex = this.state.backpack.findIndex((item) => !item);
       const backpack = Array.from(this.state.backpack);
       backpack[firstZeroIndex] = gridMap[x][y];
@@ -181,10 +183,7 @@ class GridContainer extends React.PureComponent {
       gridMap[x][y] != WALL_D
     ) {
       // mark as already visited if it's not a KEY or EXIT
-      if (
-        !Object.values(DOORS).includes(gridMap[x][y]) &&
-        !Object.values(KEYS).includes(gridMap[x][y])
-      ) {
+      if (!isElementDoor(gridMap[x][y]) && !isElementKey(gridMap[x][y])) {
         gridMap[x][y] = VISITED;
       }
 
