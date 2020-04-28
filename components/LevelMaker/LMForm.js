@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 import { MIN_MAP_SIZE, MAX_MAP_SIZE } from "./constants";
+import { validateLevelForExport } from "../../helpers";
 
 const LMForm = ({ generate, gridData }) => {
   const [mapSize, setMapSize] = useState(MIN_MAP_SIZE);
@@ -9,6 +10,7 @@ const LMForm = ({ generate, gridData }) => {
   const [mapMission, setMapMission] = useState("");
   const [swap, setSwap] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
+  const [info, setInfo] = useState(`You've got unsaved data!`);
 
   const handleSaveData = () => {
     let newLevel = [];
@@ -19,7 +21,13 @@ const LMForm = ({ generate, gridData }) => {
 
     console.log(JSON.stringify(newLevel));
 
-    setIsSaved(true);
+    try {
+      validateLevelForExport(newLevel);
+      setIsSaved(true);
+      setSwap(true);
+    } catch (e) {
+      setInfo(e.message);
+    }
   };
 
   return (
@@ -85,16 +93,17 @@ const LMForm = ({ generate, gridData }) => {
             <a className="btn" onClick={handleSaveData}>
               Save
             </a>
-
-            <span className="secondary-content orange-text">
-              You've got some unsaved changes!
-            </span>
+            <LMFormInfo message={info} />
           </>
         )}
       </div>
     </div>
   );
 };
+
+const LMFormInfo = ({ message }) => (
+  <span className="secondary-content orange-text">{message}</span>
+);
 
 LMForm.propTypes = {
   generate: PropTypes.func.isRequired,
