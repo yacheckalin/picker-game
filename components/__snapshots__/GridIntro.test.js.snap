@@ -60,10 +60,6 @@ exports[`<GridIntro /> render properly 1`] = `
               >
                 level_3
               </option>
-              <option
-                key="4"
-                value={4}
-              />
             </select>
             <label>
               Level

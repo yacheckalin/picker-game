@@ -14,22 +14,20 @@ const GridIntro = ({ loadHandler }) => {
   const [mission, setMission] = useState("Open the BLUE DOOR!");
 
   // init levelOptions via localStorage
-  let newData = [];
-  for (const [hash, data] of Object.entries(window.localStorage)) {
-    if (hash.match(/level_/is)) {
-      newData.push(JSON.parse(JSON.parse(window.localStorage.getItem(hash))));
-    }
-  }
+  let newData = new Array();
   for (const level of LEVELS) {
     newData.push(level);
+  }
+  for (const [hash, data] of Object.entries(window.localStorage)) {
+    newData.push(JSON.parse(JSON.parse(data)));
   }
 
   const handleLevelChange = (e) => {
     const { value } = e.target;
 
-    if (LEVELS[parseInt(value)] !== undefined) {
-      setMission(LEVELS[parseInt(value)][3]);
-      loadHandler(LEVELS[parseInt(value)]);
+    if (newData[parseInt(value)] !== undefined) {
+      setMission(newData[parseInt(value)][3]);
+      loadHandler(newData[parseInt(value)]);
     }
   };
 

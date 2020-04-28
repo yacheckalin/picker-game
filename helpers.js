@@ -1,15 +1,25 @@
 import React, { useState } from "react";
 import { KEYS, DOORS, WALL, WALL_D, VISITED } from "./constants";
 
-export const stuffColorPicker = (key) => {
-  switch (key) {
-    case KEYS.BLUE_KEY:
+export const stuffColorPicker = ([keyIndex, keyTag]) => {
+  switch (keyTag) {
+    case KEYS.BLUE_KEY[1]:
       return "blue";
-    case KEYS.GREEN_KEY:
+    case KEYS.GREEN_KEY[1]:
       return "green";
-    case KEYS.RED_KEY:
+    case KEYS.RED_KEY[1]:
       return "red";
   }
+};
+
+export const isInABackPack = (backpack, [, elTag]) => {
+  let inBackpack = false;
+  for (const item of backpack) {
+    if (item?.[1] === elTag) {
+      inBackpack = true;
+    }
+  }
+  return inBackpack;
 };
 
 export const isElementKey = (key) => {

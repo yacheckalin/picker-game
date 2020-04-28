@@ -3,6 +3,7 @@ import {
   isElementKey,
   isElementDoor,
   validateLevelForExport,
+  isInABackPack,
 } from "../../helpers";
 
 import { KEYS, DOORS, VISITED, WALL, WALL_D } from "../../constants";
@@ -134,5 +135,19 @@ describe("helpers ", () => {
     it("succesfully validated", () => {
       expect(validateLevelForExport(succesfullLevel)).toBeTruthy();
     });
+  });
+
+  it("isInABackPack returns false", () => {
+    const backpack = [[23, "GREEN"], 0, 0, 0, 0];
+    const el = [92, "RED"];
+
+    expect(isInABackPack(backpack, el)).toBeFalsy();
+  });
+
+  it("isInABackPack returns true", () => {
+    const backpack = [[23, "RED"], 0, 0, 0, 0];
+    const el = [92, "RED"];
+
+    expect(isInABackPack(backpack, el)).toBeTruthy();
   });
 });
