@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 import { MIN_MAP_SIZE, MAX_MAP_SIZE } from "./constants";
-import { validateLevelForExport } from "../../helpers";
+import { validateLevelForExport, useLocalStorage } from "../../helpers";
 
 const LMForm = ({ generate, gridData }) => {
   const [mapSize, setMapSize] = useState(MIN_MAP_SIZE);
@@ -12,6 +12,8 @@ const LMForm = ({ generate, gridData }) => {
   const [isSaved, setIsSaved] = useState(false);
   const [info, setInfo] = useState(`You've got unsaved data!`);
 
+  const [level, setLevel] = useLocalStorage(`level_${mapHash}`, ``, true);
+
   const handleSaveData = () => {
     let newLevel = [];
     newLevel.push(mapHash);
@@ -19,15 +21,11 @@ const LMForm = ({ generate, gridData }) => {
     newLevel.push(parseInt(mapSize));
     newLevel.push(mapMission);
 
-    console.log(JSON.stringify(newLevel));
-
     try {
       validateLevelForExport(newLevel);
-
       setSwap(true);
-
-      //TODO: Add save to localStorage here
-      setInfo(`Data were copyied to clipboard!`);
+      setLevel(JSON.stringify(newLevel));
+      setInfo(`Data were copyied to localStorage!`);
       setIsSaved(true);
     } catch (e) {
       setInfo(e.message);
