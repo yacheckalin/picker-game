@@ -13,6 +13,17 @@ const GridIntro = ({ loadHandler }) => {
 
   const [mission, setMission] = useState("Open the BLUE DOOR!");
 
+  // init levelOptions via localStorage
+  let newData = [];
+  for (const [hash, data] of Object.entries(window.localStorage)) {
+    if (hash.match(/level_/is)) {
+      newData.push(JSON.parse(JSON.parse(window.localStorage.getItem(hash))));
+    }
+  }
+  for (const level of LEVELS) {
+    newData.push(level);
+  }
+
   const handleLevelChange = (e) => {
     const { value } = e.target;
 
@@ -36,7 +47,7 @@ const GridIntro = ({ loadHandler }) => {
                   <option value="" disabled>
                     Choose your level
                   </option>
-                  {LEVELS.map((level, index) => (
+                  {newData.map((level, index) => (
                     <option key={index} value={index}>
                       {level[0]}
                     </option>
