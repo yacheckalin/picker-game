@@ -17,6 +17,11 @@ const StyledContextBlock = styled.div`
       opacity: 1;
     }
   }
+
+  .collection a span {
+    width: 20px;
+    height: 20px;
+  }
 `;
 
 const LMGridTools = ({
@@ -28,6 +33,7 @@ const LMGridTools = ({
   parentLeft,
   gridWidth,
   multipleMode,
+  handleInsert,
 }) => {
   const gridToolContextMenuRef = useRef();
 
@@ -44,6 +50,11 @@ const LMGridTools = ({
     }
   });
 
+  const handleAction = (e) => {
+    const { key } = e.target.dataset;
+    handleInsert({ key });
+  };
+
   return (
     open && (
       <StyledContextBlock
@@ -53,43 +64,91 @@ const LMGridTools = ({
         id="grid-tool-context-container"
       >
         <div className="collection">
-          <a className={`collection-item btn ${multipleMode && `disabled`}`}>
+          <a
+            className={`collection-item btn ${multipleMode && `disabled`}`}
+            data-key="GREEN_KEY"
+            onClick={handleAction}
+          >
             <i className="material-icons left green-text text-darken-2">
               vpn_key
             </i>
             Green Key
+            <span className="secondary-content green">&nbsp;</span>
           </a>
-          <a className={`collection-item btn ${multipleMode && `disabled`}`}>
+          <a
+            className={`collection-item btn ${multipleMode && `disabled`}`}
+            data-key="RED_KEY"
+            onClick={handleAction}
+          >
             <i className="material-icons left  red-text text-darken-2">
               vpn_key
             </i>
             Red Key
+            <span className="secondary-content red">&nbsp;</span>
           </a>
-          <a className={`collection-item btn ${multipleMode && `disabled`}`}>
+          <a
+            className={`collection-item btn ${multipleMode && `disabled`}`}
+            data-key="BLUE_KEY"
+            onClick={handleAction}
+          >
             <i className="material-icons left  blue-text text-darken-2">
               vpn_key
             </i>
             Blue Key
+            <span className="secondary-content blue">&nbsp;</span>
           </a>
-          <a className={`collection-item btn ${multipleMode && `disabled`}`}>
+          <a
+            className={`collection-item btn ${multipleMode && `disabled`}`}
+            data-key="BLUE_DOOR"
+            onClick={handleAction}
+          >
             <i className="material-icons left  blue-text text-darken-2">home</i>
             Blue Door
+            <span className="secondary-content blue darken-3">&nbsp;</span>
           </a>
-          <a className={`collection-item btn ${multipleMode && `disabled`}`}>
+          <a
+            className={`collection-item btn ${multipleMode && `disabled`}`}
+            data-key="RED_DOOR"
+            onClick={handleAction}
+          >
             <i className="material-icons left  red-text text-darken-2">
               lock_outline
             </i>
             Red Door
+            <span className="secondary-content red darken-3">&nbsp;</span>
           </a>
-          <a className={`collection-item btn ${multipleMode && `disabled`}`}>
+          <a
+            className={`collection-item btn ${multipleMode && `disabled`}`}
+            data-key="GREEN_DOOR"
+            onClick={handleAction}
+          >
             <i className="material-icons left  green-text text-darken-2">
               lock_outline
             </i>
             Green Door
+            <span className="secondary-content green darken-3">&nbsp;</span>
           </a>
-          <a className="collection-item btn">
-            <i className="material-icons left  blue-text text-darken-2">stop</i>
+          <a
+            className="collection-item btn"
+            data-key="WALL"
+            onClick={handleAction}
+          >
+            <i className="material-icons left  blue-text text-darken-2">
+              border_all
+            </i>
             Wall
+            <span className="secondary-content indigo">&nbsp;</span>
+          </a>
+          <a
+            className="collection-item btn"
+            data-key="WALL_D"
+            onClick={handleAction}
+          >
+            <i className="material-icons left  blue-text text-darken-2">
+              border_clear
+            </i>
+            Wall Near Door
+            <span className="secondary-content indigo lighten-3">&nbsp;</span>
           </a>
         </div>
       </StyledContextBlock>
@@ -105,6 +164,7 @@ LMGridTools.propTypes = {
   parentTop: PropTypes.number.isRequired, // child top offset
   parentLeft: PropTypes.number.isRequired, // child left offset
   gridWidth: PropTypes.number.isRequired,
+  handleInsert: PropTypes.func.isRequired,
 };
 
 export default LMGridTools;

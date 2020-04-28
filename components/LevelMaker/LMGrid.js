@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { DEFAULT_CELL_SIZE, MARK_SELECTED, MARK_CLEAR } from "./constants";
+import { KEYS, DOORS, WALL, WALL_D, EMPTY } from "../../constants";
 import LMGridTools from "./LMGridTools";
 
 import shortid from "shortid";
@@ -13,23 +14,30 @@ const StyledColumn = styled.div`
   padding: 0px;
   width: ${(prop) => prop.width}px;
   height: ${(prop) => prop.height}px;
-  border: 1px solid #ffccbc;
+  border: 1px solid #bdbdbd;
   display: inline-flexbox;
 
-  /* :hover {
+  label:hover {
     background-color: #ffccbc;
-  } */
+  }
   input {
     display: none;
   }
   input:checked + label {
-    background-color: blue;
+    background-color: #ff8a65;
   }
   label {
     display: block;
     width: 100%;
     height: 100%;
-    background-color: green;
+    background-color: #c5e1a5;
+  }
+  label > i {
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-size: 2em;
+    color: red;
   }
 `;
 
@@ -40,10 +48,6 @@ const StyledRow = styled.div`
 
 const StyledContainer = styled.div`
   position: relative;
-`;
-
-const StyledContextBlock = styled.div`
-  position: absolute;
 `;
 
 const LMGrid = ({ data, size }) => {
@@ -85,8 +89,27 @@ const LMGrid = ({ data, size }) => {
     }
   };
 
+  const mapObjectTagWithKey = (tag) => {
+    if (KEYS[tag]) return KEYS[tag];
+    if (DOORS[tag]) return DOORS[tag];
+    if (tag === "WALL") return WALL;
+    if (tag === "WALL_D") return WALL_D;
+  };
+
+  const handleInsert = ({ key }) => {
+    for (let i = 0; i < gridData.length; i++) {
+      for (let j = 0; j < gridData[i].length; j++) {
+        if (gridData[i][j] === MARK_SELECTED) {
+          gridData[i][j] = mapObjectTagWithKey(key);
+        }
+      }
+    }
+
+    setGridData(gridData);
+    setOpenTool(false);
+  };
+
   const keypressHandler = (e) => {
-    console.log(e.key);
     if (e.key == "Enter") {
       // check if there more then one cell selected
 
@@ -109,6 +132,27 @@ const LMGrid = ({ data, size }) => {
     };
   });
 
+  const renderIcon = (tag) => {
+    switch (tag) {
+      case WALL:
+        return `indigo`;
+      case WALL_D:
+        return "indigo lighten-3";
+      case DOORS.RED_DOOR:
+        return "red darken-3";
+      case DOORS.BLUE_DOOR:
+        return "blue darken-3";
+      case DOORS.GREEN_DOOR:
+        return "green darken-3";
+      case KEYS.RED_KEY:
+        return "red";
+      case KEYS.BLUE_KEY:
+        return "blue";
+      case KEYS.GREEN_KEY:
+        return "green";
+    }
+  };
+
   return (
     <StyledContainer className="row" ref={containerRef}>
       <div className="col s12 ">
@@ -123,7 +167,10 @@ const LMGrid = ({ data, size }) => {
                 id={`lm-grid-cell-${y}-${x}`}
               >
                 <input type="checkbox" id={`lm-grid-cell-input-${y}-${x}`} />
-                <label htmlFor={`lm-grid-cell-input-${y}-${x}`}>&nbsp;</label>
+                <label
+                  htmlFor={`lm-grid-cell-input-${y}-${x}`}
+                  className={renderIcon(col)}
+                ></label>
               </StyledColumn>
             ))}
           </StyledRow>
@@ -139,6 +186,7 @@ const LMGrid = ({ data, size }) => {
           gridWidth={gridWidth}
           key={shortid.generate()}
           multipleMode={isMultipleSelect}
+          handleInsert={handleInsert}
         />
       </div>
     </StyledContainer>
