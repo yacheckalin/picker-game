@@ -23,8 +23,12 @@ const LMForm = ({ generate, gridData }) => {
 
     try {
       validateLevelForExport(newLevel);
-      setIsSaved(true);
+
       setSwap(true);
+
+      //TODO: Add save to localStorage here
+      setInfo(`Data were copyied to clipboard!`);
+      setIsSaved(true);
     } catch (e) {
       setInfo(e.message);
     }
@@ -93,9 +97,9 @@ const LMForm = ({ generate, gridData }) => {
             <a className="btn" onClick={handleSaveData}>
               Save
             </a>
-            <LMFormInfo message={info} />
           </>
         )}
+        <LMFormInfo message={info} />
       </div>
     </div>
   );

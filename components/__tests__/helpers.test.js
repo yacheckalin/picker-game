@@ -58,6 +58,13 @@ describe("helpers ", () => {
       [KEYS.RED_KEY, WALL, 0, 0],
       [0, 0, 0, 0],
     ];
+    const invalidDataDoorWithoutKey = [
+      [VISITED, 0, WALL, 0],
+      [0, WALL, 0, DOORS.BLUE_DOOR],
+      [KEYS.BLUE_KEY, WALL, 0, DOORS.RED_DOOR],
+      [0, 0, 0, 0],
+    ];
+
     const levelWithoutHash = ["", validData, size, mission];
     const levelWithoutMission = [hash, validData, size, ""];
     const levelWithoutSize = [hash, validData, , mission];
@@ -113,6 +120,13 @@ describe("helpers ", () => {
     it("throw  error", () => {
       try {
         validateLevelForExport(levelWithoutExitKey);
+      } catch (e) {
+        expect(e).toBeInstanceOf(Error);
+      }
+    });
+    it("throw  error", () => {
+      try {
+        validateLevelForExport(invalidDataDoorWithoutKey);
       } catch (e) {
         expect(e).toBeInstanceOf(Error);
       }
