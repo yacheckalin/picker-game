@@ -27,6 +27,7 @@ const LMGridTools = ({
   parentTop,
   parentLeft,
   gridWidth,
+  multipleMode,
 }) => {
   const gridToolContextMenuRef = useRef();
 
@@ -52,41 +53,41 @@ const LMGridTools = ({
         id="grid-tool-context-container"
       >
         <div className="collection">
-          <a className="collection-item">
+          <a className={`collection-item btn ${multipleMode && `disabled`}`}>
             <i className="material-icons left green-text text-darken-2">
               vpn_key
             </i>
             Green Key
           </a>
-          <a className="collection-item">
+          <a className={`collection-item btn ${multipleMode && `disabled`}`}>
             <i className="material-icons left  red-text text-darken-2">
               vpn_key
             </i>
             Red Key
           </a>
-          <a className="collection-item">
+          <a className={`collection-item btn ${multipleMode && `disabled`}`}>
             <i className="material-icons left  blue-text text-darken-2">
               vpn_key
             </i>
             Blue Key
           </a>
-          <a className="collection-item">
+          <a className={`collection-item btn ${multipleMode && `disabled`}`}>
             <i className="material-icons left  blue-text text-darken-2">home</i>
             Blue Door
           </a>
-          <a className="collection-item">
+          <a className={`collection-item btn ${multipleMode && `disabled`}`}>
             <i className="material-icons left  red-text text-darken-2">
               lock_outline
             </i>
             Red Door
           </a>
-          <a className="collection-item">
+          <a className={`collection-item btn ${multipleMode && `disabled`}`}>
             <i className="material-icons left  green-text text-darken-2">
               lock_outline
             </i>
             Green Door
           </a>
-          <a className="collection-item">
+          <a className="collection-item btn">
             <i className="material-icons left  blue-text text-darken-2">stop</i>
             Wall
           </a>

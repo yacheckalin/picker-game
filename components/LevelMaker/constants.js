@@ -7,3 +7,4 @@ export const DEFAULT_GRID_MAP = [
 ];
 
 export const DEFAULT_CELL_SIZE = 40;
+export const MARK_SELECTED = 999;

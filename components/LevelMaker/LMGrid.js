@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { DEFAULT_CELL_SIZE } from "./constants";
+import { DEFAULT_CELL_SIZE, MARK_SELECTED } from "./constants";
 import LMGridTools from "./LMGridTools";
 
 import shortid from "shortid";
@@ -13,11 +13,23 @@ const StyledColumn = styled.div`
   padding: 0px;
   width: ${(prop) => prop.width}px;
   height: ${(prop) => prop.height}px;
-  border: 1px solid red;
+  border: 1px solid #ffccbc;
   display: inline-flexbox;
 
-  :hover {
+  /* :hover {
     background-color: #ffccbc;
+  } */
+  input {
+    display: none;
+  }
+  input:checked + label {
+    background-color: blue;
+  }
+  label {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: green;
   }
 `;
 
@@ -34,7 +46,7 @@ const StyledContextBlock = styled.div`
   position: absolute;
 `;
 
-const LMGrid = React.memo(({ data, size }) => {
+const LMGrid = ({ data, size }) => {
   const containerRef = useRef();
 
   const [cellWidth, setCellWidth] = useState(DEFAULT_CELL_SIZE);
@@ -43,6 +55,7 @@ const LMGrid = React.memo(({ data, size }) => {
   const [cellLeft, setCellLeft] = useState(0);
   const [openTool, setOpenTool] = useState(false);
   const [gridWidth, setGridWidth] = useState(0);
+  const [isMultipleSelect, setIsMultipleSelect] = useState(false);
 
   useEffect(() => {
     const { offsetWidth } = containerRef.current;
@@ -58,42 +71,66 @@ const LMGrid = React.memo(({ data, size }) => {
 
     setCellTop(offsetTop);
     setCellLeft(offsetLeft);
-    setOpenTool(!openTool);
   };
+
+  const keypressHandler = (e) => {
+    console.log(e.key);
+    if (e.key == "Enter") {
+      // check if there more then one cell selected
+
+      let selectedCells = [];
+      for (const row of data) {
+        for (const col of row) {
+          if (col === MARK_SELECTED) {
+            selectedCells.push(col);
+          }
+        }
+      }
+      setIsMultipleSelect(!!selectedCells.length);
+      setOpenTool(true);
+    }
+  };
+  useEffect(() => {
+    window.addEventListener("keypress", keypressHandler);
+    return () => {
+      window.removeEventListener("keypress", keypressHandler);
+    };
+  });
 
   return (
     <StyledContainer className="row" ref={containerRef}>
       <div className="col s12 ">
         {data.map((row, y) => (
-          <StyledRow key={shortid.generate()} className="row">
+          <StyledRow key={y} className="row">
             {row.map((col, x) => (
               <StyledColumn
                 width={cellWidth}
                 height={cellHeight}
-                key={shortid.generate()}
-                id={`lm-grid-cell-${y}-${x}`}
+                key={x}
                 onClick={handleContextMenuCoordinates}
               >
-                &nbsp;
+                <input type="checkbox" id={`lm-grid-cell-${y}-${x}`} />
+                <label htmlFor={`lm-grid-cell-${y}-${x}`}>&nbsp;</label>
               </StyledColumn>
             ))}
           </StyledRow>
         ))}
-      </div>
 
-      <LMGridTools
-        open={openTool}
-        cellWidth={cellWidth}
-        cellHeight={cellHeight}
-        cellSize={size}
-        parentTop={cellTop}
-        parentLeft={cellLeft}
-        gridWidth={gridWidth}
-        key={shortid.generate()}
-      />
+        <LMGridTools
+          open={openTool}
+          cellWidth={cellWidth}
+          cellHeight={cellHeight}
+          cellSize={size}
+          parentTop={cellTop}
+          parentLeft={cellLeft}
+          gridWidth={gridWidth}
+          key={shortid.generate()}
+          multipleMode={isMultipleSelect}
+        />
+      </div>
     </StyledContainer>
   );
-});
+};
 
 LMGrid.propTypes = {
   data: PropTypes.array.isRequired,
