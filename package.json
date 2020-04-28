@@ -31,6 +31,7 @@
     "materialize-css": "^1.0.0",
     "query-string": "^6.12.1",
     "react-router-dom": "^5.1.2",
+    "shortid": "^2.2.15",
     "styled-components": "^5.1.0"
   },
   "jest": {
