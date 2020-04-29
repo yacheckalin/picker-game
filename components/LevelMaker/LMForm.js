@@ -107,7 +107,17 @@ const LMForm = ({ generate, gridData }) => {
         </a>
         {!isSaved && (
           <>
-            <a className="btn" onClick={handleSaveData}>
+            <a
+              className={`btn ${
+                mapSize > MAX_MAP_SIZE ||
+                mapSize < MIN_MAP_SIZE ||
+                !mapHash ||
+                !mapMission
+                  ? `disabled`
+                  : ``
+              }`}
+              onClick={handleSaveData}
+            >
               Save
             </a>
           </>

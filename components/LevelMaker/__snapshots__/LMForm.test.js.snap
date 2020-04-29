@@ -76,7 +76,7 @@ exports[`<LMForm /> renders and displays properly 1`] = `
       Hide
     </a>
     <a
-      className="btn"
+      className="btn disabled"
       onClick={[Function]}
     >
       Save

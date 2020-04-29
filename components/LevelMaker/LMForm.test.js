@@ -41,7 +41,7 @@ describe("<LMForm />", () => {
       expect(wrapper.find("a.btn").at(2).text()).toBe("Save");
     });
 
-    test("disable Generate button when size greater then MAX_MAP_SIZE", () => {
+    test("disable Generate/Save button when size greater then MAX_MAP_SIZE", () => {
       const wrapper = mount(<LMForm {...props} />);
       wrapper
         .find("#level-maker-grid-size")
@@ -49,28 +49,31 @@ describe("<LMForm />", () => {
       expect(wrapper.find("a.btn").at(0).hasClass("disabled")).toBeTruthy();
     });
 
-    test("disable Generate button when size less then MIN_MAP_SIZE", () => {
+    test("disable Generate/Save button when size less then MIN_MAP_SIZE", () => {
       const wrapper = mount(<LMForm {...props} />);
       wrapper
         .find("#level-maker-grid-size")
         .simulate("change", { target: { value: "2" } });
       expect(wrapper.find("a.btn").at(0).hasClass("disabled")).toBeTruthy();
+      expect(wrapper.find("a.btn").at(2).hasClass("disabled")).toBeTruthy();
     });
 
-    test("disable Generate button when hash is empty", () => {
+    test("disable Generate/Save button when hash is empty", () => {
       const wrapper = mount(<LMForm {...props} />);
       wrapper
         .find("#level-maker-grid-hash")
         .simulate("change", { target: { value: "" } });
       expect(wrapper.find("a.btn").at(0).hasClass("disabled")).toBeTruthy();
+      expect(wrapper.find("a.btn").at(2).hasClass("disabled")).toBeTruthy();
     });
 
-    test("disable Generate button when mission is empty", () => {
+    test("disable Generate/Save button when mission is empty", () => {
       const wrapper = mount(<LMForm {...props} />);
       wrapper
         .find("#level-maker-grid-mission")
         .simulate("change", { target: { value: "" } });
       expect(wrapper.find("a.btn").at(0).hasClass("disabled")).toBeTruthy();
+      expect(wrapper.find("a.btn").at(2).hasClass("disabled")).toBeTruthy();
     });
 
     test("hide/show form ", () => {
