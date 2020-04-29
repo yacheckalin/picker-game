@@ -174,6 +174,7 @@ const LMGrid = ({ data, size }) => {
                 key={x}
                 onClick={handleGridMarking}
                 id={`lm-grid-cell-${y}-${x}`}
+                className="generated-grid-cell"
               >
                 <input type="checkbox" id={`lm-grid-cell-input-${y}-${x}`} />
                 <label

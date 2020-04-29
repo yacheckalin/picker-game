@@ -63,6 +63,7 @@ const LMForm = ({ generate, gridData }) => {
                 type="text"
                 onChange={(e) => setMapHash(e.target.value)}
                 id="level-maker-grid-hash"
+                className="validate"
               />
               <label htmlFor="level-maker-grid-hash">Level Hash</label>
             </div>
@@ -72,7 +73,7 @@ const LMForm = ({ generate, gridData }) => {
                 type="text"
                 onChange={(e) => setMapMission(e.target.value)}
                 id="level-maker-grid-mission"
-                className="materialize-textarea"
+                className="materialize-textarea validate"
               />
               <label htmlFor="level-maker-grid-mission">Level Mission</label>
             </div>
@@ -83,10 +84,18 @@ const LMForm = ({ generate, gridData }) => {
       <div className="row">
         {!swap && (
           <a
-            className={`btn col s2 ${mapSize > MAX_MAP_SIZE ? `disabled` : ``}`}
+            className={`btn col s2 ${
+              mapSize > MAX_MAP_SIZE ||
+              mapSize < MIN_MAP_SIZE ||
+              !mapHash ||
+              !mapMission
+                ? `disabled`
+                : ``
+            }`}
             onClick={(e) => {
               generate(parseInt(mapSize));
               setIsSaved(false);
+              setInfo(`Map has been generated`);
               setSwap(!swap);
             }}
           >
