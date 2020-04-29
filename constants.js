@@ -18,6 +18,7 @@ export const DEFAUTL_FIELD_HASH = "level_default";
 
 export const MIN_MAP_SIZE = 3;
 export const MAX_MAP_SIZE = 50;
+export const DEFAULT_GRID_SIZE = 3;
 export const DEFAULT_GRID_MAP = [
   [0, 0, 0],
   [0, 0, 0],

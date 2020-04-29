@@ -11,6 +11,7 @@ import {
   MIN_MAP_SIZE,
   MAX_MAP_SIZE,
   DEFAULT_GRID_MAP,
+  DEFAULT_GRID_SIZE,
   DEFAULT_CELL_SIZE,
   MARK_SELECTED,
   MARK_CLEAR,
@@ -32,6 +33,9 @@ describe("constants", () => {
       [0, 0, 0],
       [0, 0, 0],
     ]);
+  });
+  test("DEFAUTL_GRID_SIZE", () => {
+    expect(DEFAULT_GRID_SIZE).toEqual(3);
   });
   test("MAX_MAP_SIZE", () => {
     expect(MAX_MAP_SIZE).toBe(50);

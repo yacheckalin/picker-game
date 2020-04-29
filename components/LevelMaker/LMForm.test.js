@@ -5,7 +5,6 @@ import toJSON from "enzyme-to-json";
 import LMForm from "./LMForm";
 
 import { DEFAULT_GRID_MAP } from "../../constants";
-import { unmountComponentAtNode } from "react-dom";
 
 describe("<LMForm />", () => {
   const props = {
