@@ -149,5 +149,4 @@ This topic describes future updates which still in progress
 
 - add score counting (time, number of steps, backpack elements, etc ...)
 - add new entities (like bomb with timer)
-- add graphical editor for building levels (drag-and-drop)
 - add 'save the results' for storing data
