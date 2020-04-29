@@ -24,6 +24,7 @@ exports[`<LMGrid /> displays and shows properly 1`] = `
           type="checkbox"
         />
         <label
+          className="green lighten-4"
           htmlFor="lm-grid-cell-input-0-0"
         />
       </styled.div>
@@ -40,6 +41,7 @@ exports[`<LMGrid /> displays and shows properly 1`] = `
           type="checkbox"
         />
         <label
+          className="green lighten-4"
           htmlFor="lm-grid-cell-input-0-1"
         />
       </styled.div>
@@ -56,6 +58,7 @@ exports[`<LMGrid /> displays and shows properly 1`] = `
           type="checkbox"
         />
         <label
+          className="green lighten-4"
           htmlFor="lm-grid-cell-input-0-2"
         />
       </styled.div>
@@ -77,6 +80,7 @@ exports[`<LMGrid /> displays and shows properly 1`] = `
           type="checkbox"
         />
         <label
+          className="green lighten-4"
           htmlFor="lm-grid-cell-input-1-0"
         />
       </styled.div>
@@ -93,6 +97,7 @@ exports[`<LMGrid /> displays and shows properly 1`] = `
           type="checkbox"
         />
         <label
+          className="green lighten-4"
           htmlFor="lm-grid-cell-input-1-1"
         />
       </styled.div>
@@ -109,6 +114,7 @@ exports[`<LMGrid /> displays and shows properly 1`] = `
           type="checkbox"
         />
         <label
+          className="green lighten-4"
           htmlFor="lm-grid-cell-input-1-2"
         />
       </styled.div>
@@ -130,6 +136,7 @@ exports[`<LMGrid /> displays and shows properly 1`] = `
           type="checkbox"
         />
         <label
+          className="green lighten-4"
           htmlFor="lm-grid-cell-input-2-0"
         />
       </styled.div>
@@ -146,6 +153,7 @@ exports[`<LMGrid /> displays and shows properly 1`] = `
           type="checkbox"
         />
         <label
+          className="green lighten-4"
           htmlFor="lm-grid-cell-input-2-1"
         />
       </styled.div>
@@ -162,6 +170,7 @@ exports[`<LMGrid /> displays and shows properly 1`] = `
           type="checkbox"
         />
         <label
+          className="green lighten-4"
           htmlFor="lm-grid-cell-input-2-2"
         />
       </styled.div>

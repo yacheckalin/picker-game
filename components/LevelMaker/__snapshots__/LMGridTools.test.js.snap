@@ -14,11 +14,15 @@ exports[`<LMGridTools /> renders and displays properly 1`] = `
       data-key="GREEN_KEY"
       onClick={[Function]}
     >
-      <i
-        className="material-icons left green-text text-darken-2"
-      >
-        vpn_key
-      </i>
+      <LMGridObjectIcon
+        className="left"
+        tag={
+          Array [
+            21,
+            "GREEN",
+          ]
+        }
+      />
       Green Key
       <span
         className="secondary-content green"
@@ -31,11 +35,15 @@ exports[`<LMGridTools /> renders and displays properly 1`] = `
       data-key="RED_KEY"
       onClick={[Function]}
     >
-      <i
-        className="material-icons left  red-text text-darken-2"
-      >
-        vpn_key
-      </i>
+      <LMGridObjectIcon
+        className="left"
+        tag={
+          Array [
+            22,
+            "RED",
+          ]
+        }
+      />
       Red Key
       <span
         className="secondary-content red"
@@ -48,11 +56,15 @@ exports[`<LMGridTools /> renders and displays properly 1`] = `
       data-key="BLUE_KEY"
       onClick={[Function]}
     >
-      <i
-        className="material-icons left  blue-text text-darken-2"
-      >
-        vpn_key
-      </i>
+      <LMGridObjectIcon
+        className="left"
+        tag={
+          Array [
+            20,
+            "BLUE",
+          ]
+        }
+      />
       Blue Key
       <span
         className="secondary-content blue"
@@ -65,12 +77,16 @@ exports[`<LMGridTools /> renders and displays properly 1`] = `
       data-key="BLUE_DOOR"
       onClick={[Function]}
     >
-      <i
-        className="material-icons left  blue-text text-darken-2"
-      >
-        home
-      </i>
-      Blue Door
+      <LMGridObjectIcon
+        className="left"
+        tag={
+          Array [
+            90,
+            "BLUE",
+          ]
+        }
+      />
+       Blue Door
       <span
         className="secondary-content blue darken-3"
       >
@@ -82,11 +98,15 @@ exports[`<LMGridTools /> renders and displays properly 1`] = `
       data-key="RED_DOOR"
       onClick={[Function]}
     >
-      <i
-        className="material-icons left  red-text text-darken-2"
-      >
-        lock_outline
-      </i>
+      <LMGridObjectIcon
+        className="left"
+        tag={
+          Array [
+            92,
+            "RED",
+          ]
+        }
+      />
       Red Door
       <span
         className="secondary-content red darken-3"
@@ -99,11 +119,15 @@ exports[`<LMGridTools /> renders and displays properly 1`] = `
       data-key="GREEN_DOOR"
       onClick={[Function]}
     >
-      <i
-        className="material-icons left  green-text text-darken-2"
-      >
-        lock_outline
-      </i>
+      <LMGridObjectIcon
+        className="left"
+        tag={
+          Array [
+            91,
+            "GREEN",
+          ]
+        }
+      />
       Green Door
       <span
         className="secondary-content green darken-3"
@@ -116,11 +140,10 @@ exports[`<LMGridTools /> renders and displays properly 1`] = `
       data-key="WALL"
       onClick={[Function]}
     >
-      <i
-        className="material-icons left  blue-text text-darken-2"
-      >
-        border_all
-      </i>
+      <LMGridObjectIcon
+        className="left"
+        tag={1}
+      />
       Wall
       <span
         className="secondary-content indigo"
@@ -133,11 +156,10 @@ exports[`<LMGridTools /> renders and displays properly 1`] = `
       data-key="WALL_D"
       onClick={[Function]}
     >
-      <i
-        className="material-icons left  blue-text text-darken-2"
-      >
-        border_clear
-      </i>
+      <LMGridObjectIcon
+        className="left"
+        tag={2}
+      />
       Wall Near Door
       <span
         className="secondary-content indigo lighten-3"

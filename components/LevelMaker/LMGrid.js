@@ -14,10 +14,12 @@ import {
   EMPTY,
 } from "../../constants";
 
+import { mapIconColor } from "../../helpers";
+
 import LMGridTools from "./LMGridTools";
 
 import shortid from "shortid";
-//TODO: change the colors here
+import LMGridObjectIcon from "./LMGridObjectIcon";
 const StyledColumn = styled.div`
   margin: 0px;
   padding: 0px;
@@ -27,26 +29,20 @@ const StyledColumn = styled.div`
   display: inline-flexbox;
 
   label:hover {
-    background-color: #ffccbc;
+    background-color: #ffccbc !important;
   }
+
   input {
     display: none;
   }
   input:checked + label {
-    background-color: #ff8a65;
+    background-color: #90caf9;
   }
   label {
     display: block;
     width: 100%;
     height: 100%;
     background-color: #c5e1a5;
-  }
-  label > i {
-    display: block;
-    width: 100%;
-    height: 100%;
-    font-size: 2em;
-    color: red;
   }
 `;
 
@@ -134,33 +130,13 @@ const LMGrid = ({ data, size }) => {
       setOpenTool(true);
     }
   };
+
   useEffect(() => {
     window.addEventListener("keypress", keypressHandler);
     return () => {
       window.removeEventListener("keypress", keypressHandler);
     };
   });
-
-  const renderIcon = (tag) => {
-    switch (tag) {
-      case WALL:
-        return `indigo`;
-      case WALL_D:
-        return "indigo lighten-3";
-      case DOORS.RED_DOOR:
-        return "red darken-3";
-      case DOORS.BLUE_DOOR:
-        return "blue darken-3";
-      case DOORS.GREEN_DOOR:
-        return "green darken-3";
-      case KEYS.RED_KEY:
-        return "red";
-      case KEYS.BLUE_KEY:
-        return "blue";
-      case KEYS.GREEN_KEY:
-        return "green";
-    }
-  };
 
   return (
     <StyledContainer className="row" ref={containerRef}>
@@ -179,7 +155,7 @@ const LMGrid = ({ data, size }) => {
                 <input type="checkbox" id={`lm-grid-cell-input-${y}-${x}`} />
                 <label
                   htmlFor={`lm-grid-cell-input-${y}-${x}`}
-                  className={renderIcon(col)}
+                  className={`${mapIconColor(col)}`}
                 ></label>
               </StyledColumn>
             ))}

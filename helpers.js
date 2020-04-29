@@ -7,6 +7,8 @@ import {
   VISITED,
   MIN_MAP_SIZE,
   MAX_MAP_SIZE,
+  EMPTY,
+  MARK_SELECTED,
 } from "./constants";
 
 export const stuffColorPicker = ([keyIndex, keyTag]) => {
@@ -80,3 +82,73 @@ export function useLocalStorage(key, initialValue) {
 
   return [storedValue, setValue];
 }
+
+export const renderIconMapper = (tag) => {
+  if (tag === WALL) {
+    return { color: "indigo-text text-darken-2", name: "border_all" };
+  }
+  if (tag === WALL_D) {
+    return { color: "indigo-text text-darken-2", name: "border_clear" };
+  }
+
+  if (Array.isArray(tag)) {
+    const [tagIndex, tagName] = tag;
+
+    if (tagIndex === DOORS.RED_DOOR[0] && tagName === DOORS.RED_DOOR[1]) {
+      return { color: "red-text ", name: "lock_outline" };
+    }
+    if (tagIndex === DOORS.GREEN_DOOR[0] && tagName === DOORS.GREEN_DOOR[1]) {
+      return { color: "green-text ", name: "lock_outline" };
+    }
+    if (tagIndex === DOORS.BLUE_DOOR[0] && tagName === DOORS.BLUE_DOOR[1]) {
+      return { color: "blue-text ", name: "home" };
+    }
+    if (tagIndex === KEYS.RED_KEY[0] && tagName === KEYS.RED_KEY[1]) {
+      return { color: "red-text ", name: "vpn_key" };
+    }
+    if (tagIndex === KEYS.BLUE_KEY[0] && tagName === KEYS.BLUE_KEY[1]) {
+      return { color: "blue-text ", name: "vpn_key" };
+    }
+    if (tagIndex === KEYS.GREEN_KEY[0] && tagName === KEYS.GREEN_KEY[1]) {
+      return { color: "green-text ", name: "vpn_key" };
+    }
+  }
+  return { color: "", name: "" };
+};
+
+export const mapIconColor = (tag) => {
+  if (tag === WALL) {
+    return "indigo";
+  }
+  if (tag === WALL_D) {
+    return "indigo lighten-3";
+  }
+  if (tag === EMPTY) {
+    return "green lighten-4";
+  }
+  if (tag === MARK_SELECTED) {
+    return "blue lighten-3";
+  }
+  if (Array.isArray(tag)) {
+    const [index, name] = tag;
+    if (index === DOORS.RED_DOOR[0] && name === DOORS.RED_DOOR[1]) {
+      return "red darken-3";
+    }
+    if (index === DOORS.BLUE_DOOR[0] && name === DOORS.BLUE_DOOR[1]) {
+      return "blue darken-3";
+    }
+    if (index === DOORS.GREEN_DOOR[0] && name === DOORS.GREEN_DOOR[1]) {
+      return "green darken-3";
+    }
+    if (index === KEYS.RED_KEY[0] && name === KEYS.RED_KEY[1]) {
+      return "red";
+    }
+    if (index === KEYS.BLUE_KEY[0] && name === KEYS.BLUE_KEY[1]) {
+      return "blue";
+    }
+    if (index === KEYS.GREEN_KEY[0] && name === KEYS.GREEN_KEY[1]) {
+      return "green";
+    }
+  }
+  return "";
+};

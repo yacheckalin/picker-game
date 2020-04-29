@@ -2,6 +2,9 @@ import React, { useRef, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
+import LMGridObjectIcon from "./LMGridObjectIcon";
+import { KEYS, DOORS, WALL, WALL_D } from "../../constants";
+
 const StyledContextBlock = styled.div`
   position: absolute;
   top: ${(prop) => prop.top}px;
@@ -69,9 +72,7 @@ const LMGridTools = ({
             data-key="GREEN_KEY"
             onClick={handleAction}
           >
-            <i className="material-icons left green-text text-darken-2">
-              vpn_key
-            </i>
+            <LMGridObjectIcon tag={KEYS.GREEN_KEY} className={"left"} />
             Green Key
             <span className="secondary-content green">&nbsp;</span>
           </a>
@@ -80,9 +81,7 @@ const LMGridTools = ({
             data-key="RED_KEY"
             onClick={handleAction}
           >
-            <i className="material-icons left  red-text text-darken-2">
-              vpn_key
-            </i>
+            <LMGridObjectIcon tag={KEYS.RED_KEY} className={"left"} />
             Red Key
             <span className="secondary-content red">&nbsp;</span>
           </a>
@@ -91,9 +90,7 @@ const LMGridTools = ({
             data-key="BLUE_KEY"
             onClick={handleAction}
           >
-            <i className="material-icons left  blue-text text-darken-2">
-              vpn_key
-            </i>
+            <LMGridObjectIcon tag={KEYS.BLUE_KEY} className={"left"} />
             Blue Key
             <span className="secondary-content blue">&nbsp;</span>
           </a>
@@ -102,8 +99,8 @@ const LMGridTools = ({
             data-key="BLUE_DOOR"
             onClick={handleAction}
           >
-            <i className="material-icons left  blue-text text-darken-2">home</i>
-            Blue Door
+            <LMGridObjectIcon tag={DOORS.BLUE_DOOR} className={"left"} /> Blue
+            Door
             <span className="secondary-content blue darken-3">&nbsp;</span>
           </a>
           <a
@@ -111,9 +108,7 @@ const LMGridTools = ({
             data-key="RED_DOOR"
             onClick={handleAction}
           >
-            <i className="material-icons left  red-text text-darken-2">
-              lock_outline
-            </i>
+            <LMGridObjectIcon tag={DOORS.RED_DOOR} className={"left"} />
             Red Door
             <span className="secondary-content red darken-3">&nbsp;</span>
           </a>
@@ -122,9 +117,7 @@ const LMGridTools = ({
             data-key="GREEN_DOOR"
             onClick={handleAction}
           >
-            <i className="material-icons left  green-text text-darken-2">
-              lock_outline
-            </i>
+            <LMGridObjectIcon tag={DOORS.GREEN_DOOR} className={"left"} />
             Green Door
             <span className="secondary-content green darken-3">&nbsp;</span>
           </a>
@@ -133,9 +126,7 @@ const LMGridTools = ({
             data-key="WALL"
             onClick={handleAction}
           >
-            <i className="material-icons left  blue-text text-darken-2">
-              border_all
-            </i>
+            <LMGridObjectIcon tag={WALL} className={`left`} />
             Wall
             <span className="secondary-content indigo">&nbsp;</span>
           </a>
@@ -144,9 +135,7 @@ const LMGridTools = ({
             data-key="WALL_D"
             onClick={handleAction}
           >
-            <i className="material-icons left  blue-text text-darken-2">
-              border_clear
-            </i>
+            <LMGridObjectIcon tag={WALL_D} className={`left`} />
             Wall Near Door
             <span className="secondary-content indigo lighten-3">&nbsp;</span>
           </a>
