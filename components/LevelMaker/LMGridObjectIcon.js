@@ -20,4 +20,8 @@ const LMGridObjectIcon = ({ tag, className = "" }) => {
   );
 };
 
+LMGridObjectIcon.defaultProps = {
+  className: "",
+};
+
 export default LMGridObjectIcon;

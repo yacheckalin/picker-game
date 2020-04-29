@@ -30,6 +30,12 @@ const StyledColumn = styled.div`
 
   label:hover {
     background-color: #ffccbc !important;
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -ms-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+    opacity: 0.5;
   }
 
   input {
@@ -43,6 +49,13 @@ const StyledColumn = styled.div`
     width: 100%;
     height: 100%;
     background-color: #c5e1a5;
+
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -ms-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+    opacity: 1;
   }
 `;
 

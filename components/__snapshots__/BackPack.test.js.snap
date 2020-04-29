@@ -82,6 +82,7 @@ exports[`<BackPack /> renders and displays properly 1`] = `
             width={20}
           >
             <LMGridObjectIcon
+              className=""
               tag={
                 Array [
                   21,
@@ -146,6 +147,7 @@ exports[`<BackPack /> renders and displays properly 1`] = `
             width={20}
           >
             <LMGridObjectIcon
+              className=""
               tag={
                 Array [
                   20,
