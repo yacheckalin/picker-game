@@ -1,0 +1,150 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LMGridTools /> renders and displays properly 1`] = `
+<styled.div
+  id="grid-tool-context-container"
+  left={20}
+  top={0}
+>
+  <div
+    className="collection"
+  >
+    <a
+      className="collection-item btn false"
+      data-key="GREEN_KEY"
+      onClick={[Function]}
+    >
+      <i
+        className="material-icons left green-text text-darken-2"
+      >
+        vpn_key
+      </i>
+      Green Key
+      <span
+        className="secondary-content green"
+      >
+         
+      </span>
+    </a>
+    <a
+      className="collection-item btn false"
+      data-key="RED_KEY"
+      onClick={[Function]}
+    >
+      <i
+        className="material-icons left  red-text text-darken-2"
+      >
+        vpn_key
+      </i>
+      Red Key
+      <span
+        className="secondary-content red"
+      >
+         
+      </span>
+    </a>
+    <a
+      className="collection-item btn false"
+      data-key="BLUE_KEY"
+      onClick={[Function]}
+    >
+      <i
+        className="material-icons left  blue-text text-darken-2"
+      >
+        vpn_key
+      </i>
+      Blue Key
+      <span
+        className="secondary-content blue"
+      >
+         
+      </span>
+    </a>
+    <a
+      className="collection-item btn false"
+      data-key="BLUE_DOOR"
+      onClick={[Function]}
+    >
+      <i
+        className="material-icons left  blue-text text-darken-2"
+      >
+        home
+      </i>
+      Blue Door
+      <span
+        className="secondary-content blue darken-3"
+      >
+         
+      </span>
+    </a>
+    <a
+      className="collection-item btn false"
+      data-key="RED_DOOR"
+      onClick={[Function]}
+    >
+      <i
+        className="material-icons left  red-text text-darken-2"
+      >
+        lock_outline
+      </i>
+      Red Door
+      <span
+        className="secondary-content red darken-3"
+      >
+         
+      </span>
+    </a>
+    <a
+      className="collection-item btn false"
+      data-key="GREEN_DOOR"
+      onClick={[Function]}
+    >
+      <i
+        className="material-icons left  green-text text-darken-2"
+      >
+        lock_outline
+      </i>
+      Green Door
+      <span
+        className="secondary-content green darken-3"
+      >
+         
+      </span>
+    </a>
+    <a
+      className="collection-item btn"
+      data-key="WALL"
+      onClick={[Function]}
+    >
+      <i
+        className="material-icons left  blue-text text-darken-2"
+      >
+        border_all
+      </i>
+      Wall
+      <span
+        className="secondary-content indigo"
+      >
+         
+      </span>
+    </a>
+    <a
+      className="collection-item btn"
+      data-key="WALL_D"
+      onClick={[Function]}
+    >
+      <i
+        className="material-icons left  blue-text text-darken-2"
+      >
+        border_clear
+      </i>
+      Wall Near Door
+      <span
+        className="secondary-content indigo lighten-3"
+      >
+         
+      </span>
+    </a>
+  </div>
+</styled.div>
+`;
