@@ -17,7 +17,14 @@ import {
   EMPTY_BACKPACK_CELL,
 } from "../constants";
 
-import { isElementDoor, isElementKey, isInABackPack } from "../helpers";
+import {
+  isElementDoor,
+  isElementKey,
+  isInABackPack,
+  keyToDoorMapper,
+  isExit,
+  useKey,
+} from "../helpers";
 
 class GridContainer extends React.PureComponent {
   constructor(props) {
@@ -103,19 +110,6 @@ class GridContainer extends React.PureComponent {
       gridMap,
     } = this.state;
 
-    const keyToDoorMapper = ([doorIndex, doorTag]) => {
-      switch (doorTag) {
-        case "GREEN":
-          return KEYS.GREEN_KEY;
-        case "BLUE":
-          return KEYS.BLUE_KEY;
-        case "RED":
-          return KEYS.RED_KEY;
-      }
-    };
-
-    const isExit = ([doorIndex, doorTag]) =>
-      doorIndex === DOORS.BLUE_DOOR[0] && doorTag === DOORS.BLUE_DOOR[1];
     const breakWalls = (grid, x, y) => {
       if (grid[x + 1] !== undefined && grid[x + 1][y] == WALL_D)
         gridMap[x + 1][y] = VISITED;
@@ -126,11 +120,6 @@ class GridContainer extends React.PureComponent {
       if (grid[x][y - 1] !== undefined && grid[x][y - 1] == WALL_D)
         gridMap[x][y - 1] = VISITED;
     };
-
-    const useKey = (backpack, key) =>
-      (backpack[
-        backpack.findIndex((item) => item == key)
-      ] = EMPTY_BACKPACK_CELL);
 
     if (isElementDoor(gridMap[x][y])) {
       // is there a right key in a backpack

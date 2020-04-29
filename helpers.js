@@ -9,6 +9,7 @@ import {
   MAX_MAP_SIZE,
   EMPTY,
   MARK_SELECTED,
+  EMPTY_BACKPACK_CELL,
 } from "./constants";
 
 export const stuffColorPicker = ([keyIndex, keyTag]) => {
@@ -151,4 +152,25 @@ export const mapIconColor = (tag) => {
     }
   }
   return "";
+};
+
+export const keyToDoorMapper = ([doorIndex, doorTag]) => {
+  switch (doorTag) {
+    case "GREEN":
+      return KEYS.GREEN_KEY;
+    case "BLUE":
+      return KEYS.BLUE_KEY;
+    case "RED":
+      return KEYS.RED_KEY;
+  }
+};
+
+export const isExit = ([doorIndex, doorTag]) =>
+  doorIndex === DOORS.BLUE_DOOR[0] && doorTag === DOORS.BLUE_DOOR[1];
+
+export const useKey = (backpack, key) => {
+  const index = backpack.findIndex((item) => item[0] == key[0]);
+  if (index !== undefined) {
+    backpack[index] = EMPTY_BACKPACK_CELL;
+  }
 };

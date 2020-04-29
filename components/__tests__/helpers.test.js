@@ -4,6 +4,9 @@ import {
   isElementDoor,
   isInABackPack,
   renderIconMapper,
+  keyToDoorMapper,
+  isExit,
+  useKey,
 } from "../../helpers";
 
 import { KEYS, DOORS, WALL, WALL_D } from "../../constants";
@@ -88,5 +91,40 @@ describe("helpers ", () => {
         name: "vpn_key",
       });
     });
+  });
+
+  /**
+   * 
+
+
+  
+export const useKey = (backpack, key) =>
+  (backpack[
+    backpack.findIndex((item) => item[0] == key[0])
+  ] = EMPTY_BACKPACK_CELL);
+
+   */
+  it("keyToDoorMapper", () => {
+    expect(keyToDoorMapper(DOORS.RED_DOOR)).toEqual(KEYS.RED_KEY);
+    expect(keyToDoorMapper(DOORS.GREEN_DOOR)).toEqual(KEYS.GREEN_KEY);
+    expect(keyToDoorMapper(DOORS.BLUE_DOOR)).toEqual(KEYS.BLUE_KEY);
+  });
+
+  it("isExit return false", () => {
+    expect(isExit(DOORS.RED_DOOR)).toBeFalsy();
+  });
+  it("isExit return true", () => {
+    expect(isExit(DOORS.BLUE_DOOR)).toBeTruthy();
+  });
+
+  it("useKey removes key", () => {
+    const backpack = [KEYS.RED_KEY, 0, 0, 0, 0];
+    useKey(backpack, KEYS.RED_KEY);
+    expect(backpack).toEqual([0, 0, 0, 0, 0]);
+  });
+  it("useKey does not remove anything", () => {
+    const backpack = [KEYS.RED_KEY, 0, 0, 0, 0];
+    useKey(backpack, KEYS.BLUE_KEY);
+    expect(backpack).toEqual(backpack);
   });
 });
