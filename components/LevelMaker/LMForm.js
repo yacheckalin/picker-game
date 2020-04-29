@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 import { MIN_MAP_SIZE, MAX_MAP_SIZE } from "./constants";
-import { validateLevelForExport, useLocalStorage } from "../../helpers";
+import { useLocalStorage } from "../../helpers";
+import { validateLevelForExport } from "./validations";
 
 const LMForm = ({ generate, gridData }) => {
   const [mapSize, setMapSize] = useState(MIN_MAP_SIZE);
@@ -10,7 +11,7 @@ const LMForm = ({ generate, gridData }) => {
   const [mapMission, setMapMission] = useState("");
   const [swap, setSwap] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
-  const [info, setInfo] = useState(`You've got unsaved data!`);
+  const [info, setInfo] = useState(``);
 
   const [level, setLevel] = useLocalStorage(`level_${mapHash}`, ``, true);
 
@@ -114,6 +115,7 @@ const LMFormInfo = ({ message }) => (
 
 LMForm.propTypes = {
   generate: PropTypes.func.isRequired,
+  gridData: PropTypes.array.isRequired,
 };
 
 export default LMForm;

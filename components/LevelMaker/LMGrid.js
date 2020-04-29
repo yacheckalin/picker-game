@@ -8,7 +8,7 @@ import { KEYS, DOORS, WALL, WALL_D, EMPTY } from "../../constants";
 import LMGridTools from "./LMGridTools";
 
 import shortid from "shortid";
-
+//TODO: change the colors here
 const StyledColumn = styled.div`
   margin: 0px;
   padding: 0px;
