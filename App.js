@@ -4,7 +4,10 @@ import LevelMakerContainer from "./components/LevelMaker/LevelMakerContainer";
 
 import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
 
+import { VERSION } from "./version";
+
 const App = () => {
+  console.log(`CURRENT VIRSION ::: ${VERSION}`);
   return (
     <Router>
       <div className="container">
