@@ -3,12 +3,18 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 
 import { stuffColorPicker, isElementKey } from "../helpers";
+import LMGridObjectIcon from "./LevelMaker/LMGridObjectIcon";
 
 const StyledCell = styled.td`
   width: ${(prop) => prop.width}px;
   height: ${(prop) => prop.height}px;
   margin: 0px;
   background-color: ${(prop) => prop.color};
+  font-size: 1.75em;
+
+  i {
+    font-size: 2em;
+  }
 `;
 
 const BackPack = ({ data, cellSize }) => {
@@ -22,15 +28,7 @@ const BackPack = ({ data, cellSize }) => {
               height={cellSize}
               className="green center stack-key"
             >
-              {isElementKey(el) && (
-                <i
-                  className={`material-icons  text-darken-4 ${stuffColorPicker(
-                    el
-                  )}-text`}
-                >
-                  vpn_key
-                </i>
-              )}
+              {isElementKey(el) && <LMGridObjectIcon tag={el} />}
             </StyledCell>
           </tr>
         ))}

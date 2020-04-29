@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LevelMakerContainer /> renders and displays properly 1`] = `
+<div
+  className="col s12 card-panel lime lighten-4"
+>
+  <LMForm
+    generate={[Function]}
+    gridData={
+      Array [
+        Array [
+          0,
+          0,
+          0,
+        ],
+        Array [
+          0,
+          0,
+          0,
+        ],
+        Array [
+          0,
+          0,
+          0,
+        ],
+      ]
+    }
+  />
+  <LMGrid
+    data={
+      Array [
+        Array [
+          0,
+          0,
+          0,
+        ],
+        Array [
+          0,
+          0,
+          0,
+        ],
+        Array [
+          0,
+          0,
+          0,
+        ],
+      ]
+    }
+    key="1"
+    size={3}
+  />
+</div>
+`;

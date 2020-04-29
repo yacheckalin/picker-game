@@ -1,5 +1,16 @@
 import React, { useState } from "react";
-import { KEYS, DOORS, WALL, WALL_D, VISITED } from "./constants";
+import {
+  KEYS,
+  DOORS,
+  WALL,
+  WALL_D,
+  VISITED,
+  MIN_MAP_SIZE,
+  MAX_MAP_SIZE,
+  EMPTY,
+  MARK_SELECTED,
+  EMPTY_BACKPACK_CELL,
+} from "./constants";
 
 export const stuffColorPicker = ([keyIndex, keyTag]) => {
   switch (keyTag) {
@@ -34,99 +45,6 @@ export const isElementDoor = (door) => {
     if (code === door[0] && tag === door[1]) return true;
   }
   return false;
-};
-
-export const validateLevelForExport = ([hash, data, size, mission]) => {
-  if (!hash) {
-    throw new Error("There is no level_hash!");
-  }
-  if (!mission) {
-    throw new Error("There is no description for mission!");
-  }
-  if (!size) {
-    throw new Error("Please specify a grid size!");
-  }
-
-  if (data.length != size) {
-    throw new Error(`Map size doesn't match the grid!`);
-  }
-
-  const doorCheckScenario = () => {
-    /**
-     * [
-     * [[20, "GREEN"], [90, 'GREEN']], // [[door][key]]
-     * [[20, "GREEN"], null],
-     * [[20, "GREEN"], null],
-     *
-     * ],
-     *
-     */
-    let doorCheck = [];
-    let isExitHere = false;
-    let isBlueKeyHere = false;
-
-    for (let i = 0; i < data.length; i++) {
-      for (let j = 0; j < data[i].length; j++) {
-        if (data[i][j] == DOORS.BLUE_DOOR) {
-          isExitHere = true;
-        }
-        if (data[i][j] == KEYS.BLUE_KEY) {
-          isBlueKeyHere = true;
-        }
-
-        if (isElementDoor(data[i][j])) {
-          doorCheck.push([data[i][j], null]);
-        }
-      }
-    }
-
-    for (let i = 0; i < data.length; i++) {
-      for (let j = 0; j < data[i].length; j++) {
-        if (isElementKey(data[i][j])) {
-          const [keyIndex, keyTag] = data[i][j];
-
-          for (let k = 0; k < doorCheck.length; k++) {
-            const [[doorIndex, doorTag], key] = doorCheck[k];
-            if (doorTag === keyTag && key === null) {
-              doorCheck[k][1] = data[i][j];
-            }
-          }
-        }
-      }
-    }
-
-    for (let i = 0; i < doorCheck.length; i++) {
-      const [[doorIndex, doorTag], key] = doorCheck[i];
-      if (key === null) {
-        throw new Error(`There is a ${doorTag} without key!`);
-      }
-    }
-  };
-
-  let isExitHere = false;
-  let isBlueKeyHere = false;
-
-  for (let i = 0; i < data.length; i++) {
-    for (let j = 0; j < data[i].length; j++) {
-      if (data[i][j] == DOORS.BLUE_DOOR) {
-        isExitHere = true;
-      }
-      if (data[i][j] == KEYS.BLUE_KEY) {
-        isBlueKeyHere = true;
-      }
-    }
-  }
-
-  if (!isExitHere) {
-    throw new Error("Please put blue door (exit)!");
-  }
-  if (!isBlueKeyHere) {
-    throw new Error("There is no blue key on the map!");
-  }
-
-  doorCheckScenario();
-
-  return true;
 };
 
 // Hook
@@ -165,3 +83,94 @@ export function useLocalStorage(key, initialValue) {
 
   return [storedValue, setValue];
 }
+
+export const renderIconMapper = (tag) => {
+  if (tag === WALL) {
+    return { color: "indigo-text text-darken-2", name: "border_all" };
+  }
+  if (tag === WALL_D) {
+    return { color: "indigo-text text-darken-2", name: "border_clear" };
+  }
+
+  if (Array.isArray(tag)) {
+    const [tagIndex, tagName] = tag;
+
+    if (tagIndex === DOORS.RED_DOOR[0] && tagName === DOORS.RED_DOOR[1]) {
+      return { color: "red-text ", name: "lock_outline" };
+    }
+    if (tagIndex === DOORS.GREEN_DOOR[0] && tagName === DOORS.GREEN_DOOR[1]) {
+      return { color: "green-text ", name: "lock_outline" };
+    }
+    if (tagIndex === DOORS.BLUE_DOOR[0] && tagName === DOORS.BLUE_DOOR[1]) {
+      return { color: "blue-text ", name: "home" };
+    }
+    if (tagIndex === KEYS.RED_KEY[0] && tagName === KEYS.RED_KEY[1]) {
+      return { color: "red-text ", name: "vpn_key" };
+    }
+    if (tagIndex === KEYS.BLUE_KEY[0] && tagName === KEYS.BLUE_KEY[1]) {
+      return { color: "blue-text ", name: "vpn_key" };
+    }
+    if (tagIndex === KEYS.GREEN_KEY[0] && tagName === KEYS.GREEN_KEY[1]) {
+      return { color: "green-text ", name: "vpn_key" };
+    }
+  }
+  return { color: "", name: "" };
+};
+
+export const mapIconColor = (tag) => {
+  if (tag === WALL) {
+    return "indigo";
+  }
+  if (tag === WALL_D) {
+    return "indigo lighten-3";
+  }
+  if (tag === EMPTY) {
+    return "green lighten-4";
+  }
+  if (tag === MARK_SELECTED) {
+    return "blue lighten-3";
+  }
+  if (Array.isArray(tag)) {
+    const [index, name] = tag;
+    if (index === DOORS.RED_DOOR[0] && name === DOORS.RED_DOOR[1]) {
+      return "red darken-3";
+    }
+    if (index === DOORS.BLUE_DOOR[0] && name === DOORS.BLUE_DOOR[1]) {
+      return "blue darken-3";
+    }
+    if (index === DOORS.GREEN_DOOR[0] && name === DOORS.GREEN_DOOR[1]) {
+      return "green darken-3";
+    }
+    if (index === KEYS.RED_KEY[0] && name === KEYS.RED_KEY[1]) {
+      return "red";
+    }
+    if (index === KEYS.BLUE_KEY[0] && name === KEYS.BLUE_KEY[1]) {
+      return "blue";
+    }
+    if (index === KEYS.GREEN_KEY[0] && name === KEYS.GREEN_KEY[1]) {
+      return "green";
+    }
+  }
+  return "";
+};
+
+export const keyToDoorMapper = ([doorIndex, doorTag]) => {
+  switch (doorTag) {
+    case "GREEN":
+      return KEYS.GREEN_KEY;
+    case "BLUE":
+      return KEYS.BLUE_KEY;
+    case "RED":
+      return KEYS.RED_KEY;
+  }
+};
+
+export const isExit = ([doorIndex, doorTag]) =>
+  doorIndex === DOORS.BLUE_DOOR[0] && doorTag === DOORS.BLUE_DOOR[1];
+
+export const useKey = (backpack, key) => {
+  const index = backpack.findIndex((item) => item[0] == key[0]);
+  if (index !== undefined) {
+    backpack[index] = EMPTY_BACKPACK_CELL;
+  }
+};

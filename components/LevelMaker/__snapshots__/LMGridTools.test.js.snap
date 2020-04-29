@@ -1,0 +1,172 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LMGridTools /> renders and displays properly 1`] = `
+<styled.div
+  id="grid-tool-context-container"
+  left={20}
+  top={0}
+>
+  <div
+    className="collection"
+  >
+    <a
+      className="collection-item btn false"
+      data-key="GREEN_KEY"
+      onClick={[Function]}
+    >
+      <LMGridObjectIcon
+        className="left"
+        tag={
+          Array [
+            21,
+            "GREEN",
+          ]
+        }
+      />
+      Green Key
+      <span
+        className="secondary-content green"
+      >
+         
+      </span>
+    </a>
+    <a
+      className="collection-item btn false"
+      data-key="RED_KEY"
+      onClick={[Function]}
+    >
+      <LMGridObjectIcon
+        className="left"
+        tag={
+          Array [
+            22,
+            "RED",
+          ]
+        }
+      />
+      Red Key
+      <span
+        className="secondary-content red"
+      >
+         
+      </span>
+    </a>
+    <a
+      className="collection-item btn false"
+      data-key="BLUE_KEY"
+      onClick={[Function]}
+    >
+      <LMGridObjectIcon
+        className="left"
+        tag={
+          Array [
+            20,
+            "BLUE",
+          ]
+        }
+      />
+      Blue Key
+      <span
+        className="secondary-content blue"
+      >
+         
+      </span>
+    </a>
+    <a
+      className="collection-item btn false"
+      data-key="BLUE_DOOR"
+      onClick={[Function]}
+    >
+      <LMGridObjectIcon
+        className="left"
+        tag={
+          Array [
+            90,
+            "BLUE",
+          ]
+        }
+      />
+       Blue Door
+      <span
+        className="secondary-content blue darken-3"
+      >
+         
+      </span>
+    </a>
+    <a
+      className="collection-item btn false"
+      data-key="RED_DOOR"
+      onClick={[Function]}
+    >
+      <LMGridObjectIcon
+        className="left"
+        tag={
+          Array [
+            92,
+            "RED",
+          ]
+        }
+      />
+      Red Door
+      <span
+        className="secondary-content red darken-3"
+      >
+         
+      </span>
+    </a>
+    <a
+      className="collection-item btn false"
+      data-key="GREEN_DOOR"
+      onClick={[Function]}
+    >
+      <LMGridObjectIcon
+        className="left"
+        tag={
+          Array [
+            91,
+            "GREEN",
+          ]
+        }
+      />
+      Green Door
+      <span
+        className="secondary-content green darken-3"
+      >
+         
+      </span>
+    </a>
+    <a
+      className="collection-item btn"
+      data-key="WALL"
+      onClick={[Function]}
+    >
+      <LMGridObjectIcon
+        className="left"
+        tag={1}
+      />
+      Wall
+      <span
+        className="secondary-content indigo"
+      >
+         
+      </span>
+    </a>
+    <a
+      className="collection-item btn"
+      data-key="WALL_D"
+      onClick={[Function]}
+    >
+      <LMGridObjectIcon
+        className="left"
+        tag={2}
+      />
+      Wall Near Door
+      <span
+        className="secondary-content indigo lighten-3"
+      >
+         
+      </span>
+    </a>
+  </div>
+</styled.div>
+`;

@@ -2,11 +2,14 @@ import {
   stuffColorPicker,
   isElementKey,
   isElementDoor,
-  validateLevelForExport,
   isInABackPack,
+  renderIconMapper,
+  keyToDoorMapper,
+  isExit,
+  useKey,
 } from "../../helpers";
 
-import { KEYS, DOORS, VISITED, WALL, WALL_D } from "../../constants";
+import { KEYS, DOORS, WALL, WALL_D } from "../../constants";
 
 describe("helpers ", () => {
   it("stuffColorPicker return class for BLUE_KEY", () => {
@@ -37,106 +40,6 @@ describe("helpers ", () => {
     expect(isElementDoor([1111, "some other tag"])).toBeFalsy();
   });
 
-  describe("validateLevelForExport ", () => {
-    const hash = "level_hash_1";
-    const mission = "Mission description";
-    const size = 4;
-    const validData = [
-      [VISITED, 0, WALL, 0],
-      [0, WALL, 0, DOORS.BLUE_DOOR],
-      [KEYS.BLUE_KEY, WALL, 0, 0],
-      [0, 0, 0, KEYS.BLUE_KEY],
-    ];
-    const invalidDataWithoutExit = [
-      [VISITED, 0, WALL, 0],
-      [0, WALL, 0, DOORS.RED_DOOR],
-      [KEYS.BLUE_KEY, WALL, 0, 0],
-      [0, 0, 0, KEYS.BLUE_KEY],
-    ];
-    const invalidDataWithoutKey = [
-      [VISITED, 0, WALL, 0],
-      [0, WALL, 0, DOORS.BLUE_DOOR],
-      [KEYS.RED_KEY, WALL, 0, 0],
-      [0, 0, 0, 0],
-    ];
-    const invalidDataDoorWithoutKey = [
-      [VISITED, 0, WALL, 0],
-      [0, WALL, 0, DOORS.BLUE_DOOR],
-      [KEYS.BLUE_KEY, WALL, 0, DOORS.RED_DOOR],
-      [0, 0, 0, 0],
-    ];
-
-    const levelWithoutHash = ["", validData, size, mission];
-    const levelWithoutMission = [hash, validData, size, ""];
-    const levelWithoutSize = [hash, validData, , mission];
-    const levelWithoutData = [hash, [], size, mission];
-    const levelSizeMismatch = [hash, validData, 5, mission];
-    const succesfullLevel = [hash, validData, size, mission];
-    const levelWithoutExit = [hash, invalidDataWithoutExit, size, mission];
-    const levelWithoutExitKey = [hash, invalidDataWithoutKey, size, mission];
-
-    it("throw hash error", () => {
-      try {
-        validateLevelForExport(levelWithoutHash);
-      } catch (error) {
-        expect(error).toBeInstanceOf(Error);
-      }
-    });
-
-    it("throw mission error", () => {
-      try {
-        validateLevelForExport(levelWithoutMission);
-      } catch (error) {
-        expect(error).toBeInstanceOf(Error);
-      }
-    });
-    it("throw size error", () => {
-      try {
-        validateLevelForExport(levelWithoutSize);
-      } catch (error) {
-        expect(error).toBeInstanceOf(Error);
-      }
-    });
-    it("throw size error", () => {
-      try {
-        validateLevelForExport(levelSizeMismatch);
-      } catch (e) {
-        expect(e).toBeInstanceOf(Error);
-      }
-    });
-    it("throw data error", () => {
-      try {
-        validateLevelForExport(levelWithoutData);
-      } catch (e) {
-        expect(e).toBeInstanceOf(Error);
-      }
-    });
-    it("throw  error", () => {
-      try {
-        validateLevelForExport(levelWithoutExit);
-      } catch (e) {
-        expect(e).toBeInstanceOf(Error);
-      }
-    });
-    it("throw  error", () => {
-      try {
-        validateLevelForExport(levelWithoutExitKey);
-      } catch (e) {
-        expect(e).toBeInstanceOf(Error);
-      }
-    });
-    it("throw  error", () => {
-      try {
-        validateLevelForExport(invalidDataDoorWithoutKey);
-      } catch (e) {
-        expect(e).toBeInstanceOf(Error);
-      }
-    });
-    it("succesfully validated", () => {
-      expect(validateLevelForExport(succesfullLevel)).toBeTruthy();
-    });
-  });
-
   it("isInABackPack returns false", () => {
     const backpack = [[23, "GREEN"], 0, 0, 0, 0];
     const el = [92, "RED"];
@@ -149,5 +52,79 @@ describe("helpers ", () => {
     const el = [92, "RED"];
 
     expect(isInABackPack(backpack, el)).toBeTruthy();
+  });
+
+  describe("renderIconMapper cases", () => {
+    it("works properly", () => {
+      expect(renderIconMapper(0)).toEqual({ color: "", name: "" });
+      expect(renderIconMapper(WALL)).toEqual({
+        color: "indigo-text text-darken-2",
+        name: "border_all",
+      });
+      expect(renderIconMapper(WALL_D)).toEqual({
+        color: "indigo-text text-darken-2",
+        name: "border_clear",
+      });
+      expect(renderIconMapper(DOORS.RED_DOOR)).toEqual({
+        color: "red-text ",
+        name: "lock_outline",
+      });
+      expect(renderIconMapper(DOORS.GREEN_DOOR)).toEqual({
+        color: "green-text ",
+        name: "lock_outline",
+      });
+      expect(renderIconMapper(DOORS.BLUE_DOOR)).toEqual({
+        color: "blue-text ",
+        name: "home",
+      });
+
+      expect(renderIconMapper(KEYS.RED_KEY)).toEqual({
+        color: "red-text ",
+        name: "vpn_key",
+      });
+      expect(renderIconMapper(KEYS.BLUE_KEY)).toEqual({
+        color: "blue-text ",
+        name: "vpn_key",
+      });
+      expect(renderIconMapper(KEYS.GREEN_KEY)).toEqual({
+        color: "green-text ",
+        name: "vpn_key",
+      });
+    });
+  });
+
+  /**
+   * 
+
+
+  
+export const useKey = (backpack, key) =>
+  (backpack[
+    backpack.findIndex((item) => item[0] == key[0])
+  ] = EMPTY_BACKPACK_CELL);
+
+   */
+  it("keyToDoorMapper", () => {
+    expect(keyToDoorMapper(DOORS.RED_DOOR)).toEqual(KEYS.RED_KEY);
+    expect(keyToDoorMapper(DOORS.GREEN_DOOR)).toEqual(KEYS.GREEN_KEY);
+    expect(keyToDoorMapper(DOORS.BLUE_DOOR)).toEqual(KEYS.BLUE_KEY);
+  });
+
+  it("isExit return false", () => {
+    expect(isExit(DOORS.RED_DOOR)).toBeFalsy();
+  });
+  it("isExit return true", () => {
+    expect(isExit(DOORS.BLUE_DOOR)).toBeTruthy();
+  });
+
+  it("useKey removes key", () => {
+    const backpack = [KEYS.RED_KEY, 0, 0, 0, 0];
+    useKey(backpack, KEYS.RED_KEY);
+    expect(backpack).toEqual([0, 0, 0, 0, 0]);
+  });
+  it("useKey does not remove anything", () => {
+    const backpack = [KEYS.RED_KEY, 0, 0, 0, 0];
+    useKey(backpack, KEYS.BLUE_KEY);
+    expect(backpack).toEqual(backpack);
   });
 });

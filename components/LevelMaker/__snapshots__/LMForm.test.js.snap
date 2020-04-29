@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LMForm /> renders and displays properly 1`] = `
+<div
+  className="card-panel"
+>
+  <div
+    className="row"
+  >
+    <div
+      className="input-field col s12"
+    >
+      <input
+        className="validate"
+        id="level-maker-grid-size"
+        max="50"
+        min="3"
+        onChange={[Function]}
+        type="number"
+        value={3}
+      />
+      <label
+        htmlFor="level-maker-grid-size"
+      >
+        Choose size 
+        [3 - 50]
+        :
+      </label>
+    </div>
+    <div
+      className="input-field col s6"
+    >
+      <input
+        className="validate"
+        id="level-maker-grid-hash"
+        onChange={[Function]}
+        type="text"
+        value=""
+      />
+      <label
+        htmlFor="level-maker-grid-hash"
+      >
+        Level Hash
+      </label>
+    </div>
+    <div
+      className="input-field col s6"
+    >
+      <textarea
+        className="materialize-textarea validate"
+        id="level-maker-grid-mission"
+        onChange={[Function]}
+        type="text"
+        value=""
+      />
+      <label
+        htmlFor="level-maker-grid-mission"
+      >
+        Level Mission
+      </label>
+    </div>
+  </div>
+  <div
+    className="row"
+  >
+    <a
+      className="btn col s2 disabled"
+      onClick={[Function]}
+    >
+      Generate
+    </a>
+    <a
+      className="btn col s2"
+      onClick={[Function]}
+    >
+      Hide
+    </a>
+    <a
+      className="btn disabled"
+      onClick={[Function]}
+    >
+      Save
+    </a>
+    <LMFormInfo
+      message=""
+    />
+  </div>
+</div>
+`;

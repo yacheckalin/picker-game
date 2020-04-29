@@ -11,6 +11,9 @@
 - [Types of map objects](#types-of-map-objects)
 - [Adding new level](#adding-new-level)
 - [TODO](#todo)
+- [CHANGE LOG](https://github.com/yacheckalin/picker-game/blob/master/CHANGE_LOG.md)
+
+- [Level Maker](https://github.com/yacheckalin/picker-game/tree/master/components/LevelMaker/README.md)
 
 #### Motivation
 
@@ -37,7 +40,13 @@ yarn dev
 
 > > yarn dev will start the development server and watch for changes on the client-side code
 
-Now you may visit <code>http://localhost:1234</code> to start playing!
+Now you may visit <code>http://localhost:1234</code> and click <code>Playground</code> link to start playing!
+
+or
+
+```javascript
+http://localhost:1234/play
+```
 
 #### Gameplay
 

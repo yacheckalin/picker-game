@@ -21,7 +21,10 @@ exports[`<Grid /> renders and displays properly 1`] = `
         ],
       ],
       Array [
-        0,
+        Array [
+          20,
+          "BLUE",
+        ],
         1,
         0,
         0,
@@ -37,252 +40,314 @@ exports[`<Grid /> renders and displays properly 1`] = `
       ],
     ]
   }
+  recalculate={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          Object {
+            "pointerHeight": 0,
+            "pointerWidth": 0,
+          },
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
 >
-  <table
-    className="centered grid"
-  >
-    <tbody>
-      <tr
-        key="0"
+  <div>
+    <styled.div
+      key="0"
+    >
+      <div
+        className="sc-AxirZ geALnH"
       >
-        <styled.td
-          className="light-green lighten-4"
+        <styled.div
+          className="grid-cell light-green lighten-4"
           height={40}
+          id="#grid-cell-0-0"
           key="0"
           width={40}
         >
-          <td
-            className="sc-AxjAm dfJKjN light-green lighten-4"
+          <div
+            className="sc-AxjAm iYVETC grid-cell light-green lighten-4"
             height={40}
+            id="#grid-cell-0-0"
             width={40}
           >
              
-          </td>
-        </styled.td>
-        <styled.td
-          className=""
+          </div>
+        </styled.div>
+        <styled.div
+          className="grid-cell blue"
           height={40}
+          id="#grid-cell-0-1"
           key="1"
           width={40}
         >
-          <td
-            className="sc-AxjAm dfJKjN"
+          <div
+            className="sc-AxjAm iYVETC grid-cell blue"
             height={40}
+            id="#grid-cell-0-1"
             width={40}
           >
              
-          </td>
-        </styled.td>
-        <styled.td
-          className=""
+          </div>
+        </styled.div>
+        <styled.div
+          className="grid-cell blue"
           height={40}
+          id="#grid-cell-0-2"
           key="2"
           width={40}
         >
-          <td
-            className="sc-AxjAm dfJKjN"
+          <div
+            className="sc-AxjAm iYVETC grid-cell blue"
             height={40}
+            id="#grid-cell-0-2"
             width={40}
           >
              
-          </td>
-        </styled.td>
-        <styled.td
-          className=""
+          </div>
+        </styled.div>
+        <styled.div
+          className="grid-cell blue"
           height={40}
+          id="#grid-cell-0-3"
           key="3"
           width={40}
         >
-          <td
-            className="sc-AxjAm dfJKjN"
+          <div
+            className="sc-AxjAm iYVETC grid-cell blue"
             height={40}
+            id="#grid-cell-0-3"
             width={40}
           >
              
-          </td>
-        </styled.td>
-      </tr>
-      <tr
-        key="1"
+          </div>
+        </styled.div>
+      </div>
+    </styled.div>
+    <styled.div
+      key="1"
+    >
+      <div
+        className="sc-AxirZ geALnH"
       >
-        <styled.td
-          className=""
+        <styled.div
+          className="grid-cell blue"
           height={40}
+          id="#grid-cell-1-0"
           key="0"
           width={40}
         >
-          <td
-            className="sc-AxjAm dfJKjN"
+          <div
+            className="sc-AxjAm iYVETC grid-cell blue"
             height={40}
+            id="#grid-cell-1-0"
             width={40}
           >
              
-          </td>
-        </styled.td>
-        <styled.td
-          className=""
+          </div>
+        </styled.div>
+        <styled.div
+          className="grid-cell blue"
           height={40}
+          id="#grid-cell-1-1"
           key="1"
           width={40}
         >
-          <td
-            className="sc-AxjAm dfJKjN"
+          <div
+            className="sc-AxjAm iYVETC grid-cell blue"
             height={40}
+            id="#grid-cell-1-1"
             width={40}
           >
              
-          </td>
-        </styled.td>
-        <styled.td
-          className=""
+          </div>
+        </styled.div>
+        <styled.div
+          className="grid-cell blue"
           height={40}
+          id="#grid-cell-1-2"
           key="2"
           width={40}
         >
-          <td
-            className="sc-AxjAm dfJKjN"
+          <div
+            className="sc-AxjAm iYVETC grid-cell blue"
             height={40}
+            id="#grid-cell-1-2"
             width={40}
           >
              
-          </td>
-        </styled.td>
-        <styled.td
-          className=""
+          </div>
+        </styled.div>
+        <styled.div
+          className="grid-cell blue"
           height={40}
+          id="#grid-cell-1-3"
           key="3"
           width={40}
         >
-          <td
-            className="sc-AxjAm dfJKjN"
+          <div
+            className="sc-AxjAm iYVETC grid-cell blue"
             height={40}
+            id="#grid-cell-1-3"
             width={40}
           >
              
-          </td>
-        </styled.td>
-      </tr>
-      <tr
-        key="2"
+          </div>
+        </styled.div>
+      </div>
+    </styled.div>
+    <styled.div
+      key="2"
+    >
+      <div
+        className="sc-AxirZ geALnH"
       >
-        <styled.td
-          className=""
+        <styled.div
+          className="grid-cell blue"
           height={40}
+          id="#grid-cell-2-0"
           key="0"
           width={40}
         >
-          <td
-            className="sc-AxjAm dfJKjN"
+          <div
+            className="sc-AxjAm iYVETC grid-cell blue"
             height={40}
+            id="#grid-cell-2-0"
             width={40}
           >
              
-          </td>
-        </styled.td>
-        <styled.td
-          className=""
+          </div>
+        </styled.div>
+        <styled.div
+          className="grid-cell blue"
           height={40}
+          id="#grid-cell-2-1"
           key="1"
           width={40}
         >
-          <td
-            className="sc-AxjAm dfJKjN"
+          <div
+            className="sc-AxjAm iYVETC grid-cell blue"
             height={40}
+            id="#grid-cell-2-1"
             width={40}
           >
              
-          </td>
-        </styled.td>
-        <styled.td
-          className=""
+          </div>
+        </styled.div>
+        <styled.div
+          className="grid-cell blue"
           height={40}
+          id="#grid-cell-2-2"
           key="2"
           width={40}
         >
-          <td
-            className="sc-AxjAm dfJKjN"
+          <div
+            className="sc-AxjAm iYVETC grid-cell blue"
             height={40}
+            id="#grid-cell-2-2"
             width={40}
           >
              
-          </td>
-        </styled.td>
-        <styled.td
-          className=""
+          </div>
+        </styled.div>
+        <styled.div
+          className="grid-cell blue"
           height={40}
+          id="#grid-cell-2-3"
           key="3"
           width={40}
         >
-          <td
-            className="sc-AxjAm dfJKjN"
+          <div
+            className="sc-AxjAm iYVETC grid-cell blue"
             height={40}
+            id="#grid-cell-2-3"
             width={40}
           >
              
-          </td>
-        </styled.td>
-      </tr>
-      <tr
-        key="3"
+          </div>
+        </styled.div>
+      </div>
+    </styled.div>
+    <styled.div
+      key="3"
+    >
+      <div
+        className="sc-AxirZ geALnH"
       >
-        <styled.td
-          className=""
+        <styled.div
+          className="grid-cell blue"
           height={40}
+          id="#grid-cell-3-0"
           key="0"
           width={40}
         >
-          <td
-            className="sc-AxjAm dfJKjN"
+          <div
+            className="sc-AxjAm iYVETC grid-cell blue"
             height={40}
+            id="#grid-cell-3-0"
             width={40}
           >
              
-          </td>
-        </styled.td>
-        <styled.td
-          className=""
+          </div>
+        </styled.div>
+        <styled.div
+          className="grid-cell blue"
           height={40}
+          id="#grid-cell-3-1"
           key="1"
           width={40}
         >
-          <td
-            className="sc-AxjAm dfJKjN"
+          <div
+            className="sc-AxjAm iYVETC grid-cell blue"
             height={40}
+            id="#grid-cell-3-1"
             width={40}
           >
              
-          </td>
-        </styled.td>
-        <styled.td
-          className=""
+          </div>
+        </styled.div>
+        <styled.div
+          className="grid-cell blue"
           height={40}
+          id="#grid-cell-3-2"
           key="2"
           width={40}
         >
-          <td
-            className="sc-AxjAm dfJKjN"
+          <div
+            className="sc-AxjAm iYVETC grid-cell blue"
             height={40}
+            id="#grid-cell-3-2"
             width={40}
           >
              
-          </td>
-        </styled.td>
-        <styled.td
-          className=""
+          </div>
+        </styled.div>
+        <styled.div
+          className="grid-cell blue"
           height={40}
+          id="#grid-cell-3-3"
           key="3"
           width={40}
         >
-          <td
-            className="sc-AxjAm dfJKjN"
+          <div
+            className="sc-AxjAm iYVETC grid-cell blue"
             height={40}
+            id="#grid-cell-3-3"
             width={40}
           >
              
-          </td>
-        </styled.td>
-      </tr>
-    </tbody>
-  </table>
+          </div>
+        </styled.div>
+      </div>
+    </styled.div>
+  </div>
 </Grid>
 `;

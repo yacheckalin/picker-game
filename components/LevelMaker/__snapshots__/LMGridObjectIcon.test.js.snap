@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LMGridObjectIcon /> renders and displays properly 1`] = `
+<styled.i
+  className="material-icons text-darken-2 red-text  "
+>
+  lock_outline
+</styled.i>
+`;
