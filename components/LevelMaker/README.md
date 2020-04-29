@@ -1,8 +1,7 @@
-<p><video controls width="500" height="240>
-  <source src="../../assets/level_maker_demo.mov">
+<p>
   <img src='../../assets/level_maker_demo.gif' />
 
-</video></p>
+</p>
 
 #### Table of Contents
 
