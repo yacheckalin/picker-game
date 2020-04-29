@@ -1,5 +1,5 @@
 import { DOORS, KEYS } from "../../constants";
-import { MIN_MAP_SIZE, MAX_MAP_SIZE } from "./constants";
+import { MIN_MAP_SIZE, MAX_MAP_SIZE } from "../../constants";
 import { isElementDoor, isElementKey } from "../../helpers";
 
 export const validateLevelForExport = ([hash, data, size, mission]) => {

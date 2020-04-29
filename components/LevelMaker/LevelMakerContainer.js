@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import LMForm from "./LMForm";
 import LMGrid from "./LMGrid";
 
-import { MIN_MAP_SIZE, DEFAULT_GRID_MAP } from "./constants";
+import { MIN_MAP_SIZE, DEFAULT_GRID_MAP } from "../../constants";
 import shortid from "shortid";
 
 const LevelMakerContainer = React.memo(() => {

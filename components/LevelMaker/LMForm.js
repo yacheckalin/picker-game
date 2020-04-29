@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-import { MIN_MAP_SIZE, MAX_MAP_SIZE } from "./constants";
+import { MIN_MAP_SIZE, MAX_MAP_SIZE } from "../../constants";
 import { useLocalStorage } from "../../helpers";
 import { validateLevelForExport } from "./validations";
 

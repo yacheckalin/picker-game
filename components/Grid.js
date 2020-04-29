@@ -23,10 +23,15 @@ const StyledRow = styled.div`
 const Grid = ({ data, cellSize, recalculate }) => {
   useEffect(() => {
     // calculate the pointer height, width size from the first element on a grid
-    const { offsetHeight, offsetWidth } = document.getElementById(
-      "#grid-cell-0-0"
-    );
-
+    const el = document.getElementById("#grid-cell-0-0");
+    let offsetHeight, offsetWidth;
+    if (el) {
+      offsetHeight = el.offsetHeight;
+      offsetWidth = el.offsetWidth;
+    } else {
+      offsetHeight = 0;
+      offsetWidth = 0;
+    }
     recalculate({ pointerWidth: offsetWidth, pointerHeight: offsetHeight });
   });
   return (

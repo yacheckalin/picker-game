@@ -3,8 +3,17 @@ import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { DEFAULT_CELL_SIZE, MARK_SELECTED, MARK_CLEAR } from "./constants";
-import { KEYS, DOORS, WALL, WALL_D, EMPTY } from "../../constants";
+import {
+  DEFAULT_CELL_SIZE,
+  MARK_SELECTED,
+  MARK_CLEAR,
+  KEYS,
+  DOORS,
+  WALL,
+  WALL_D,
+  EMPTY,
+} from "../../constants";
+
 import LMGridTools from "./LMGridTools";
 
 import shortid from "shortid";

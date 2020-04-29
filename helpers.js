@@ -1,6 +1,13 @@
 import React, { useState } from "react";
-import { KEYS, DOORS, WALL, WALL_D, VISITED } from "./constants";
-import { MIN_MAP_SIZE, MAX_MAP_SIZE } from "./components/LevelMaker/constants";
+import {
+  KEYS,
+  DOORS,
+  WALL,
+  WALL_D,
+  VISITED,
+  MIN_MAP_SIZE,
+  MAX_MAP_SIZE,
+} from "./constants";
 
 export const stuffColorPicker = ([keyIndex, keyTag]) => {
   switch (keyTag) {
